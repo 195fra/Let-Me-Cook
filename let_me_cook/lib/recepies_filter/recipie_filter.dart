@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'food_item.dart';
-
+/*
 void main() {
   runApp(MyApp());
-}
+}*/
 
-
-class MyApp extends StatelessWidget {
+// UI
+class RecipieFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,7 +23,7 @@ class FoodListPage extends StatefulWidget {
   @override
   _FoodListPageState createState() => _FoodListPageState();
 }
-
+// model
 class _FoodListPageState extends State<FoodListPage> {
   List<FoodItem> allFoodItems = [];
   List<FoodItem> filteredFoodItems = [];
@@ -39,7 +39,7 @@ class _FoodListPageState extends State<FoodListPage> {
 
   // Caricamento JSON da assets
   Future<void> loadFoodList() async {
-    String jsonString = await rootBundle.loadString('assets/data.json');
+    String jsonString = await rootBundle.loadString("json_recipes/recipes.json");
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     List<dynamic> foodListJson = jsonMap['food list'];
     List<FoodItem> items =
@@ -51,7 +51,7 @@ class _FoodListPageState extends State<FoodListPage> {
     });
   }
 
-  // Filtro ricette in base agli ingredienti
+  // Filtro ricette in base agli ingredienti  --> model
   void filterRecipes() {
     List<String> mustInclude = includeText
         .toLowerCase()
