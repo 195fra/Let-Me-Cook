@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:let_me_cook/recepies_filter/MVVM/food_list_page.dart';
 import 'package:let_me_cook/recepies_filter/recipie_filter.dart';
 
 void main() {
@@ -115,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => RecipieFilter()),
+                MaterialPageRoute(builder: (context) => FoodListPage()),
               );
             },
             child: const Text('Vai alla pagina filtri'),
