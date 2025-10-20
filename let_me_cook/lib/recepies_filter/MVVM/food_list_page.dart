@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:let_me_cook/recepies_filter/MVVM/food_list_viewmodel.dart';
-import 'package:let_me_cook/recepies_filter/food_item.dart';
 
 class FoodListPage extends StatefulWidget {
   @override
@@ -33,9 +32,13 @@ class _FoodListPageState extends State<FoodListPage> {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: viewModel.availableIngredients.map((ingredient) {
-                        final isIncluded = viewModel.selectedIncludeIngredients.contains(ingredient);
-                        final isExcluded = viewModel.selectedExcludeIngredients.contains(ingredient);
+                      children: viewModel.availableIngredients.map((
+                        ingredient,
+                      ) {
+                        final isIncluded = viewModel.selectedIncludeIngredients
+                            .contains(ingredient);
+                        final isExcluded = viewModel.selectedExcludeIngredients
+                            .contains(ingredient);
 
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -50,7 +53,9 @@ class _FoodListPageState extends State<FoodListPage> {
                                   });
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: isIncluded ? Colors.green : Colors.blue,
+                                  backgroundColor: isIncluded
+                                      ? Colors.green
+                                      : Colors.blue,
                                 ),
                                 child: Text(ingredient),
                               ),
@@ -64,7 +69,9 @@ class _FoodListPageState extends State<FoodListPage> {
                                   });
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: isExcluded ? Colors.red : Colors.blue,
+                                  backgroundColor: isExcluded
+                                      ? Colors.red
+                                      : Colors.blue,
                                 ),
                                 child: Text('Exclude $ingredient'),
                               ),
@@ -89,7 +96,7 @@ class _FoodListPageState extends State<FoodListPage> {
                         onChanged: (value) {
                           viewModel.includeText = value;
                           viewModel.filterRecipes();
-                          setState(() {});  // Rende reattiva la UI
+                          setState(() {}); // Rende reattiva la UI
                         },
                       ),
                       SizedBox(height: 8),
@@ -101,7 +108,7 @@ class _FoodListPageState extends State<FoodListPage> {
                         onChanged: (value) {
                           viewModel.excludeText = value;
                           viewModel.filterRecipes();
-                          setState(() {});  // Rende reattiva la UI
+                          setState(() {}); // Rende reattiva la UI
                         },
                       ),
                     ],

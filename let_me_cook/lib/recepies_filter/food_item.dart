@@ -6,6 +6,7 @@ class FoodItem {
   final String source;
   final List<String> tags;
   final String url;
+  final String category;
 
   FoodItem({
     required this.title,
@@ -15,6 +16,7 @@ class FoodItem {
     required this.source,
     required this.tags,
     required this.url,
+    required this.category,
   });
 
   // Metodo per creare un oggetto FoodItem da una mappa JSON
@@ -27,6 +29,7 @@ class FoodItem {
       source: json['source'],
       tags: List<String>.from(json['tags']),
       url: json['url'],
+      category: json['category'],
     );
   }
 }
