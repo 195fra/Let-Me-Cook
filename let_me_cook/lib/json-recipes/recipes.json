@@ -20,7 +20,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Taiwanese Fried Tofu",
-            "url": "http://allrecipes.com/recipe/53817/taiwanese-fried-tofu/"
+            "url": "http://allrecipes.com/recipe/53817/taiwanese-fried-tofu/",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -66,7 +67,8 @@
                 "Kosher"
             ],
             "title": "Tahini Chicken Salad",
-            "url": "http://www.epicurious.com/recipes/food/views/tahini-chicken-salad-109640"
+            "url": "http://www.epicurious.com/recipes/food/views/tahini-chicken-salad-109640",
+            "category": "main course"
         },
         {
             "directions": [
@@ -85,7 +87,9 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Taco Meat",
-            "url": "http://allrecipes.com/recipe/239930/taco-meat/"
+            "url": "http://allrecipes.com/recipe/239930/taco-meat/",
+            "category": "main course"
+
         },
         {
             "directions": [
@@ -109,7 +113,8 @@
                 "Thyme"
             ],
             "title": "T-Bone Steak with Thyme and Garlic Butter",
-            "url": "http://www.epicurious.com/recipes/food/views/t-bone-steak-with-thyme-and-garlic-butter-56390091"
+            "url": "http://www.epicurious.com/recipes/food/views/t-bone-steak-with-thyme-and-garlic-butter-56390091",
+            "category": "main course"
         },
         {
             "directions": [
@@ -129,7 +134,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tomato Basil Tagliatelle",
-            "url": "http://allrecipes.com/recipe/219273/tomato-basil-tagliatelle/"
+            "url": "http://allrecipes.com/recipe/219273/tomato-basil-tagliatelle/",
+            "category": "first course"
         },
         {
             "directions": [
@@ -161,7 +167,8 @@
                 "Gourmet"
             ],
             "title": "Tagliatelle with Zucchini and Shrimp",
-            "url": "http://www.epicurious.com/recipes/food/views/tagliatelle-with-zucchini-and-shrimp-107018"
+            "url": "http://www.epicurious.com/recipes/food/views/tagliatelle-with-zucchini-and-shrimp-107018",
+            "category": "first course"
         },
         {
             "directions": [
@@ -197,7 +204,8 @@
                 "Gourmet"
             ],
             "title": "Fresh Parsley Tagliatelle with Porcini",
-            "url": "http://www.epicurious.com/recipes/food/views/fresh-parsley-tagliatelle-with-porcini-14929"
+            "url": "http://www.epicurious.com/recipes/food/views/fresh-parsley-tagliatelle-with-porcini-14929",
+            "category": "first course"
         },
         {
             "directions": [
@@ -247,7 +255,8 @@
                 "Broil"
             ],
             "title": "Macaroni and Cheese with Prosciutto and Taleggio",
-            "url": "http://www.epicurious.com/recipes/food/views/macaroni-and-cheese-with-prosciutto-and-taleggio-235816"
+            "url": "http://www.epicurious.com/recipes/food/views/macaroni-and-cheese-with-prosciutto-and-taleggio-235816",
+            "category": "first course"
         },
         {
             "directions": [
@@ -267,7 +276,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Avocado and Tuna Tapas",
-            "url": "http://allrecipes.com/recipe/139620/avocado-and-tuna-tapas/"
+            "url": "http://allrecipes.com/recipe/139620/avocado-and-tuna-tapas/",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -287,7 +297,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tao Hummus",
-            "url": "http://allrecipes.com/recipe/231783/tao-hummus/"
+            "url": "http://allrecipes.com/recipe/231783/tao-hummus/",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -316,7 +327,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tante's Apple Pie",
-            "url": "http://allrecipes.com/recipe/23649/tantes-apple-pie/"
+            "url": "http://allrecipes.com/recipe/23649/tantes-apple-pie/",
+            "category": "dessert"
         },
         {
             "directions": [
@@ -338,7 +350,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tangy Potato Salad",
-            "url": "http://allrecipes.com/recipe/231056/tangy-potato-salad/"
+            "url": "http://allrecipes.com/recipe/231056/tangy-potato-salad/",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -362,7 +375,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tangy Pork Chops",
-            "url": "http://allrecipes.com/recipe/230085/tangy-pork-chops/"
+            "url": "http://allrecipes.com/recipe/230085/tangy-pork-chops/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -384,7 +398,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tangy Pesto Potato Salad",
-            "url": "http://allrecipes.com/recipe/247208/tangy-pesto-potato-salad/"
+            "url": "http://allrecipes.com/recipe/247208/tangy-pesto-potato-salad/",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -407,7 +422,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tangy Egg Salad Spread",
-            "url": "http://allrecipes.com/recipe/25496/tangy-egg-salad-spread/"
+            "url": "http://allrecipes.com/recipe/25496/tangy-egg-salad-spread/",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -426,7 +442,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tangy, Creamy String Bean Soup",
-            "url": "http://allrecipes.com/recipe/145646/tangy-creamy-string-bean-soup/"
+            "url": "http://allrecipes.com/recipe/145646/tangy-creamy-string-bean-soup/",
+            "category": "first course"
         },
         {
             "directions": [
@@ -446,7 +463,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tangerine Cherry Cranberry Sauce",
-            "url": "http://allrecipes.com/recipe/222397/tangerine-cherry-cranberry-sauce/"
+            "url": "http://allrecipes.com/recipe/222397/tangerine-cherry-cranberry-sauce/",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -476,7 +494,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tandoori Chicken Salad",
-            "url": "http://allrecipes.com/recipe/73257/tandoori-chicken-salad/"
+            "url": "http://allrecipes.com/recipe/73257/tandoori-chicken-salad/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -511,7 +530,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tammy's  Favorite Lasagna",
-            "url": "http://allrecipes.com/recipe/47408/tammys-favorite-lasagna/"
+            "url": "http://allrecipes.com/recipe/47408/tammys-favorite-lasagna/",
+            "category": "first course"
         },
         {
             "directions": [
@@ -542,7 +562,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tamarind Sauce Fish Curry",
-            "url": "http://allrecipes.com/recipe/245131/tamarind-sauce-fish-curry/"
+            "url": "http://allrecipes.com/recipe/245131/tamarind-sauce-fish-curry/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -584,7 +605,8 @@
                 "Kosher"
             ],
             "title": "Tamarind \"Teriyaki\" Chicken Skewers",
-            "url": "http://www.epicurious.com/recipes/food/views/tamarind-teriyaki-chicken-skewers-51171800"
+            "url": "http://www.epicurious.com/recipes/food/views/tamarind-teriyaki-chicken-skewers-51171800",
+            "category": "main course"
         },
         {
             "directions": [
@@ -623,7 +645,8 @@
                 "Soy Free"
             ],
             "title": "Salad of Grilled Asparagus with Taleggio Cheese and Serrano Ham",
-            "url": "http://www.epicurious.com/recipes/food/views/salad-of-grilled-asparagus-with-taleggio-cheese-and-serrano-ham-103876"
+            "url": "http://www.epicurious.com/recipes/food/views/salad-of-grilled-asparagus-with-taleggio-cheese-and-serrano-ham-103876",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -651,7 +674,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tasty Fried Cauliflower with Sweet and Sour Sauce",
-            "url": "http://allrecipes.com/recipe/247117/tasty-fried-cauliflower-with-sweet-an/"
+            "url": "http://allrecipes.com/recipe/247117/tasty-fried-cauliflower-with-sweet-an/",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -673,7 +697,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tasty Cabbage Salad",
-            "url": "http://allrecipes.com/recipe/17276/tasty-cabbage-salad/"
+            "url": "http://allrecipes.com/recipe/17276/tasty-cabbage-salad/",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -695,7 +720,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tasty BBQ Corn on the Cob",
-            "url": "http://allrecipes.com/recipe/17338/tasty-bbq-corn-on-the-cob/"
+            "url": "http://allrecipes.com/recipe/17338/tasty-bbq-corn-on-the-cob/",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -716,7 +742,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tasty Baked Meatballs",
-            "url": "http://allrecipes.com/recipe/151340/tasty-baked-meatballs/"
+            "url": "http://allrecipes.com/recipe/151340/tasty-baked-meatballs/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -744,7 +771,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tasty Baked Mac n Cheese",
-            "url": "http://allrecipes.com/recipe/230283/tasty-baked-mac-n-cheese/"
+            "url": "http://allrecipes.com/recipe/230283/tasty-baked-mac-n-cheese/",
+            "category": "first course"
         },
         {
             "directions": [
@@ -768,7 +796,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tastiest Cookie Ever",
-            "url": "http://allrecipes.com/recipe/50025/tastiest-cookie-ever/"
+            "url": "http://allrecipes.com/recipe/50025/tastiest-cookie-ever/",
+            "category": "dessert"
         },
         {
             "directions": [
@@ -786,7 +815,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tastefully Simple Beer Bread",
-            "url": "http://allrecipes.com/recipe/234408/tastefully-simple-beer-bread/"
+            "url": "http://allrecipes.com/recipe/234408/tastefully-simple-beer-bread/",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -803,7 +833,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tartar Sauce I",
-            "url": "http://allrecipes.com/recipe/12788/tartar-sauce-i/"
+            "url": "http://allrecipes.com/recipe/12788/tartar-sauce-i/",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -825,7 +856,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tarragon Rice Salad",
-            "url": "http://allrecipes.com/recipe/51418/tarragon-rice-salad/"
+            "url": "http://allrecipes.com/recipe/51418/tarragon-rice-salad/",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -864,7 +896,8 @@
                 "Kosher"
             ],
             "title": "Tarragon Pizza Bianca",
-            "url": "http://www.epicurious.com/recipes/food/views/tarragon-pizza-bianca-109366"
+            "url": "http://www.epicurious.com/recipes/food/views/tarragon-pizza-bianca-109366",
+            "category": "first course"
         },
         {
             "directions": [
@@ -890,7 +923,8 @@
                 "Spring"
             ],
             "title": "Tarragon Mayonnaise",
-            "url": "http://www.epicurious.com/recipes/food/views/tarragon-mayonnaise-15348"
+            "url": "http://www.epicurious.com/recipes/food/views/tarragon-mayonnaise-15348",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -917,7 +951,8 @@
                 "Lime Juice"
             ],
             "title": "Tarragon-Cilantro Salsa Verde",
-            "url": "http://www.epicurious.com/recipes/food/views/tarragon-cilantro-salsa-verde-51241230"
+            "url": "http://www.epicurious.com/recipes/food/views/tarragon-cilantro-salsa-verde-51241230",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -941,7 +976,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tarragon Chicken and Rice Soup",
-            "url": "http://allrecipes.com/recipe/231509/tarragon-chicken-and-rice-soup/"
+            "url": "http://allrecipes.com/recipe/231509/tarragon-chicken-and-rice-soup/",
+            "category": "first course"
         },
         {
             "directions": [
@@ -968,7 +1004,8 @@
                 "Gourmet"
             ],
             "title": "Tarragon-Caper Egg Salad Sandwiches with Smoked Salmon",
-            "url": "http://www.epicurious.com/recipes/food/views/tarragon-caper-egg-salad-sandwiches-with-smoked-salmon-105416"
+            "url": "http://www.epicurious.com/recipes/food/views/tarragon-caper-egg-salad-sandwiches-with-smoked-salmon-105416",
+            "category": "main course"
         },
         {
             "directions": [
@@ -986,7 +1023,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tarragon Butter",
-            "url": "http://allrecipes.com/recipe/14665/tarragon-butter/"
+            "url": "http://allrecipes.com/recipe/14665/tarragon-butter/",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -1010,7 +1048,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tex Mex Stir Fry",
-            "url": "http://allrecipes.com/recipe/213474/tex-mex-stir-fry/"
+            "url": "http://allrecipes.com/recipe/213474/tex-mex-stir-fry/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1032,7 +1071,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tex Mex Meatloaf",
-            "url": "http://allrecipes.com/recipe/16331/tex-mex-meatloaf/"
+            "url": "http://allrecipes.com/recipe/16331/tex-mex-meatloaf/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1060,7 +1100,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tex-Mex Beef and Cheese Enchiladas",
-            "url": "http://allrecipes.com/recipe/71436/tex-mex-beef-and-cheese-enchiladas/"
+            "url": "http://allrecipes.com/recipe/71436/tex-mex-beef-and-cheese-enchiladas/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1083,7 +1124,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Teriyaki Salmon",
-            "url": "http://allrecipes.com/recipe/228285/teriyaki-salmon/"
+            "url": "http://allrecipes.com/recipe/228285/teriyaki-salmon/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1102,7 +1144,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Teriyaki Pork Chops",
-            "url": "http://allrecipes.com/recipe/247091/teriyaki-pork-chops/"
+            "url": "http://allrecipes.com/recipe/247091/teriyaki-pork-chops/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1121,7 +1164,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Teriyaki Mushrooms",
-            "url": "http://allrecipes.com/recipe/54607/teriyaki-mushrooms/"
+            "url": "http://allrecipes.com/recipe/54607/teriyaki-mushrooms/",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -1140,7 +1184,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Teriyaki Marinade with Ginger and Garlic",
-            "url": "http://allrecipes.com/recipe/25430/teriyaki-marinade-with-ginger-and-gar/"
+            "url": "http://allrecipes.com/recipe/25430/teriyaki-marinade-with-ginger-and-gar/",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -1162,7 +1207,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Teriyaki Chicken Wings",
-            "url": "http://allrecipes.com/recipe/88438/teriyaki-chicken-wings/"
+            "url": "http://allrecipes.com/recipe/88438/teriyaki-chicken-wings/",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -1187,7 +1233,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tennille's Italian Pasta Salad",
-            "url": "http://allrecipes.com/recipe/16519/tennilles-italian-pasta-salad/"
+            "url": "http://allrecipes.com/recipe/16519/tennilles-italian-pasta-salad/",
+            "category": "first course"
         },
         {
             "directions": [
@@ -1204,7 +1251,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tender Moose",
-            "url": "http://allrecipes.com/recipe/185318/tender-moose/"
+            "url": "http://allrecipes.com/recipe/185318/tender-moose/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1227,7 +1275,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tender and Easy Buttermilk Waffles",
-            "url": "http://allrecipes.com/recipe/233920/tender-and-easy-buttermilk-waffles/"
+            "url": "http://allrecipes.com/recipe/233920/tender-and-easy-buttermilk-waffles/",
+            "category": "dessert"
         },
         {
             "directions": [
@@ -1243,7 +1292,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tempura Dipping Sauce",
-            "url": "http://allrecipes.com/recipe/52620/tempura-dipping-sauce/"
+            "url": "http://allrecipes.com/recipe/52620/tempura-dipping-sauce/",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -1267,7 +1317,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tempeh Sandwiches",
-            "url": "http://allrecipes.com/recipe/128969/tempeh-sandwiches/"
+            "url": "http://allrecipes.com/recipe/128969/tempeh-sandwiches/",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -1294,7 +1345,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tempeh Ratatouille",
-            "url": "http://allrecipes.com/recipe/42138/tempeh-ratatouille/"
+            "url": "http://allrecipes.com/recipe/42138/tempeh-ratatouille/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1322,7 +1374,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Teena's Bacon and Cheddar Potatoes",
-            "url": "http://allrecipes.com/recipe/76462/teenas-bacon-and-cheddar-potatoes/"
+            "url": "http://allrecipes.com/recipe/76462/teenas-bacon-and-cheddar-potatoes/",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -1353,7 +1406,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Taylor's Piroshki",
-            "url": "http://allrecipes.com/recipe/26670/taylors-piroshki/"
+            "url": "http://allrecipes.com/recipe/26670/taylors-piroshki/",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -1373,7 +1427,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tater Tot Casserole I",
-            "url": "http://allrecipes.com/recipe/23912/tater-tot-casserole-i/"
+            "url": "http://allrecipes.com/recipe/23912/tater-tot-casserole-i/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1413,7 +1468,8 @@
                 "Tree Nut Free"
             ],
             "title": "Ginger Beef Tataki with Lemon-Soy Dipping Sauce",
-            "url": "http://www.epicurious.com/recipes/food/views/ginger-beef-tataki-with-lemon-soy-dipping-sauce-103262"
+            "url": "http://www.epicurious.com/recipes/food/views/ginger-beef-tataki-with-lemon-soy-dipping-sauce-103262",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1447,7 +1503,8 @@
             "source": "www.williams-sonoma.com",
             "tags": [],
             "title": "Beef Tataki",
-            "url": "http://www.williams-sonoma.com/recipe/beef-tataki.html"
+            "url": "http://www.williams-sonoma.com/recipe/beef-tataki.html",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1468,7 +1525,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tasty Tuna Pasta",
-            "url": "http://allrecipes.com/recipe/19351/tasty-tuna-pasta/"
+            "url": "http://allrecipes.com/recipe/19351/tasty-tuna-pasta/",
+            "category": "first course"
         },
         {
             "directions": [
@@ -1491,7 +1549,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tasty Tender Pork Tenderloin",
-            "url": "http://allrecipes.com/recipe/36352/tasty-tender-pork-tenderloin/"
+            "url": "http://allrecipes.com/recipe/36352/tasty-tender-pork-tenderloin/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1508,7 +1567,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tasty Sweet Potatoes",
-            "url": "http://allrecipes.com/recipe/21365/tasty-sweet-potatoes/"
+            "url": "http://allrecipes.com/recipe/21365/tasty-sweet-potatoes/",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -1532,7 +1592,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tasty Spinach Treats",
-            "url": "http://allrecipes.com/recipe/26989/tasty-spinach-treats/"
+            "url": "http://allrecipes.com/recipe/26989/tasty-spinach-treats/",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -1558,7 +1619,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Tasty Spaghetti Sauce",
-            "url": "http://allrecipes.com/recipe/46678/tasty-spaghetti-sauce/"
+            "url": "http://allrecipes.com/recipe/46678/tasty-spaghetti-sauce/",
+            "category": "first course"
         },
         {
             "directions": [
@@ -1600,7 +1662,8 @@
                 "Gourmet"
             ],
             "title": "Thai-Inspired Shrimp Stir-Fry",
-            "url": "http://www.epicurious.com/recipes/food/views/thai-inspired-shrimp-stir-fry-14487"
+            "url": "http://www.epicurious.com/recipes/food/views/thai-inspired-shrimp-stir-fry-14487",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1624,7 +1687,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Thai Curry Chicken and Rice",
-            "url": "http://allrecipes.com/recipe/212505/thai-curry-chicken-and-rice/"
+            "url": "http://allrecipes.com/recipe/212505/thai-curry-chicken-and-rice/",
+            "category": "first course"
         },
         {
             "directions": [
@@ -1650,7 +1714,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Thai Cucumber Salad with Udon Noodles",
-            "url": "http://allrecipes.com/recipe/246562/thai-cucumber-salad-with-udon-noodles/"
+            "url": "http://allrecipes.com/recipe/246562/thai-cucumber-salad-with-udon-noodles/",
+            "category": "first course"
         },
         {
             "directions": [
@@ -1667,7 +1732,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Thai Coffee",
-            "url": "http://allrecipes.com/recipe/42796/thai-coffee/"
+            "url": "http://allrecipes.com/recipe/42796/thai-coffee/",
+            "category": "beverage"
         },
         {
             "directions": [
@@ -1694,7 +1760,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Thai Chicken",
-            "url": "http://allrecipes.com/recipe/64339/thai-chicken/"
+            "url": "http://allrecipes.com/recipe/64339/thai-chicken/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1713,7 +1780,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Thai Chicken Tenders",
-            "url": "http://allrecipes.com/recipe/104481/thai-chicken-tenders/"
+            "url": "http://allrecipes.com/recipe/104481/thai-chicken-tenders/",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1754,7 +1822,8 @@
                 "Soy Free"
             ],
             "title": "Thai Chicken Curry",
-            "url": "http://www.epicurious.com/recipes/food/views/thai-chicken-curry-103786"
+            "url": "http://www.epicurious.com/recipes/food/views/thai-chicken-curry-103786",
+            "category": "main course"
         },
         {
             "directions": [
@@ -1784,7 +1853,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Thai Chicken Burgers",
-            "url": "http://allrecipes.com/recipe/51373/thai-chicken-burgers/"
+            "url": "http://allrecipes.com/recipe/51373/thai-chicken-burgers/",
+            "category": "first course"
         },
         {
             "directions": [
@@ -1809,7 +1879,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Thai Carrot Salad",
-            "url": "http://allrecipes.com/recipe/239964/thai-carrot-salad/"
+            "url": "http://allrecipes.com/recipe/239964/thai-carrot-salad/",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -1834,7 +1905,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Thai Buffalo Wings",
-            "url": "http://allrecipes.com/recipe/219898/thai-buffalo-wings/"
+            "url": "http://allrecipes.com/recipe/219898/thai-buffalo-wings/",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -1867,7 +1939,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Texas Hot Sauce",
-            "url": "http://allrecipes.com/recipe/14488/texas-hot-sauce/"
+            "url": "http://allrecipes.com/recipe/14488/texas-hot-sauce/",
+            "category": "side dish"
         },
         {
             "directions": [
@@ -1890,7 +1963,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Texas Eggs",
-            "url": "http://allrecipes.com/recipe/15619/texas-eggs/"
+            "url": "http://allrecipes.com/recipe/15619/texas-eggs/",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -1908,7 +1982,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Texas Egg Rolls",
-            "url": "http://allrecipes.com/recipe/215388/texas-egg-rolls/"
+            "url": "http://allrecipes.com/recipe/215388/texas-egg-rolls/",
+            "category": "appetizer"
         },
         {
             "directions": [
@@ -1942,7 +2017,8 @@
             "source": "allrecipes.com",
             "tags": [],
             "title": "Texas Chili Dog",
-            "url": "http://allrecipes.com/recipe/256911/texas-chili-dog/"
+            "url": "http://allrecipes.com/recipe/256911/texas-chili-dog/",
+            "category": "main course"
         }
     ]
 }
