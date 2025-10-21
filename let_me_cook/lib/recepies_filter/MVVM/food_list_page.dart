@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:let_me_cook/recepies_filter/MVVM/food_list_viewmodel.dart';
-<<<<<<< HEAD
 import 'package:let_me_cook/recepies_filter/food_item.dart';
 import 'package:let_me_cook/components/bottom_bar.dart';
-=======
->>>>>>> f9adcd103e7b0246a8afacd1ed03561deb2f2fac
 
 class FoodListPage extends StatefulWidget {
   @override
