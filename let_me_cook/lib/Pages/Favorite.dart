@@ -1,16 +1,47 @@
 import 'package:flutter/material.dart';
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+class FavouritePage extends StatelessWidget {
+  const FavouritePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Your Faves")),
+      appBar: AppBar(title: Text('Your Faves')),
       body: Column(
         children: [
-          CarouselView(
-            itemExtent: 20,
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 6),
+                  child: Chip(label: Text('All')),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 6),
+                  child: Chip(label: Text('Appetizer')),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 6),
+                  child: Chip(label: Text('First Course')),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 6),
+                  child: Chip(label: Text('Main Course')),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 6),
+                  child: Chip(label: Text('Side Dish')),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 6),
+                  child: Chip(label: Text('Dessert')),
+                ),
+              ],
+            ),
+          ),
+          Column(
             children: [
               SizedBox(child: Text('Appetizer')),
               SizedBox(child: Text('First Course')),
