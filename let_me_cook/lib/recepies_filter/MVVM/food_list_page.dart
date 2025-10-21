@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:let_me_cook/recepies_filter/MVVM/food_list_viewmodel.dart';
 import 'package:let_me_cook/recepies_filter/food_item.dart';
+import 'package:let_me_cook/components/bottom_bar.dart';
 
 class FoodListPage extends StatefulWidget {
   @override
@@ -152,6 +153,7 @@ class _FoodListPageState extends State<FoodListPage> {
                 ),
               ],
             ),
+            bottomNavigationBar: const BottomBar(),
     );
   }
 }
