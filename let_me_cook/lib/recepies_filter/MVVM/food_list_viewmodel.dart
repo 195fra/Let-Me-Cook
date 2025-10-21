@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:let_me_cook/recepies_filter/food_item.dart';
+
 class FoodListViewModel {
   List<FoodItem> allFoodItems = [];
   List<FoodItem> filteredFoodItems = [];
@@ -10,8 +11,22 @@ class FoodListViewModel {
 
   // Lista di ingredienti predefiniti per i bottoni
   List<String> availableIngredients = [
-    'Tomato', 'Cheese', 'Lettuce', 'Chicken', 'Beef', 'Garlic', 'Onion', 'Olive',
-    'Cucumber', 'Pepper', 'Mushroom', 'Carrot', 'Bacon', 'Pasta', 'Rice', 'Spinach'
+    'Tomato',
+    'Cheese',
+    'Lettuce',
+    'Chicken',
+    'Beef',
+    'Garlic',
+    'Onion',
+    'Olive',
+    'Cucumber',
+    'Pepper',
+    'Mushroom',
+    'Carrot',
+    'Bacon',
+    'Pasta',
+    'Rice',
+    'Spinach',
   ];
 
   // Set degli ingredienti selezionati (inclusi ed esclusi)
@@ -24,8 +39,9 @@ class FoodListViewModel {
     String jsonString = await rootBundle.loadString("recipes.json");
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     List<dynamic> foodListJson = jsonMap['food list'];
-    List<FoodItem> items =
-        foodListJson.map((item) => FoodItem.fromJson(item)).toList();
+    List<FoodItem> items = foodListJson
+        .map((item) => FoodItem.fromJson(item))
+        .toList();
 
     allFoodItems = items;
     filteredFoodItems = items;
@@ -53,13 +69,19 @@ class FoodListViewModel {
     mustExclude.addAll(selectedExcludeIngredients.map((s) => s.toLowerCase()));
 
     filteredFoodItems = allFoodItems.where((recipe) {
-      final ingredientsLower = recipe.ingredients.map((i) => i.toLowerCase()).toList();
+      final ingredientsLower = recipe.ingredients
+          .map((i) => i.toLowerCase())
+          .toList();
 
-      final includesAll = mustInclude.every((item) =>
-          ingredientsLower.any((ingredient) => ingredient.contains(item)));
+      final includesAll = mustInclude.every(
+        (item) =>
+            ingredientsLower.any((ingredient) => ingredient.contains(item)),
+      );
 
-      final excludesAll = mustExclude.every((item) =>
-          !ingredientsLower.any((ingredient) => ingredient.contains(item)));
+      final excludesAll = mustExclude.every(
+        (item) =>
+            !ingredientsLower.any((ingredient) => ingredient.contains(item)),
+      );
 
       return includesAll && excludesAll;
     }).toList();
@@ -74,7 +96,7 @@ class FoodListViewModel {
       selectedExcludeIngredients.remove(ingredient);
       selectedIncludeIngredients.add(ingredient);
     }
-    filterRecipes();  // Applica il filtro dopo la selezione
+    filterRecipes(); // Applica il filtro dopo la selezione
   }
 
   // Aggiungi o rimuovi ingredienti dal filtro "exclude"
@@ -86,6 +108,6 @@ class FoodListViewModel {
       selectedIncludeIngredients.remove(ingredient);
       selectedExcludeIngredients.add(ingredient);
     }
-    filterRecipes();  // Applica il filtro dopo la selezione
+    filterRecipes(); // Applica il filtro dopo la selezione
   }
 }

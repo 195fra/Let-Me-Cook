@@ -16,7 +16,11 @@ class FoodItem {
     required this.source,
     required this.tags,
     required this.url,
+<<<<<<< HEAD
     required this.category
+=======
+    required this.category,
+>>>>>>> f9adcd103e7b0246a8afacd1ed03561deb2f2fac
   });
 
   // Metodo per creare un oggetto FoodItem da una mappa JSON
@@ -29,7 +33,11 @@ class FoodItem {
       source: json['source'],
       tags: List<String>.from(json['tags']),
       url: json['url'],
+<<<<<<< HEAD
       category: json['category']
+=======
+      category: json['category'],
+>>>>>>> f9adcd103e7b0246a8afacd1ed03561deb2f2fac
     );
   }
 }
