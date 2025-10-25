@@ -14,102 +14,126 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       //appBar: AppBar(),
-      body: Column(
-        children: [
-          Container( color: Color(0xFF7D8554),
-            child: 
-            Row( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Column(children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: Text("Hello Mario! \nReady to cook with what's in you kitchen?",                       
-            )
-            ),
-            Image.asset("assets/images/chef.png",height: 100,),
-            ],
-            ),     
-              Image.asset('assets/images/image_1.png')
-            ],
-            ),
-          ),
-          Row(
-            //immagine persona e testo+bottone
-          ),
-          Text("whats in the fridge"),
-          Container(
-            padding: EdgeInsets.all(20),
-            height: 200,
-            child: Row(
-              children: [
-                Expanded(
-                  child: 
-                  GridView.count(
-                    crossAxisCount: 5,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    children: [
-                      ...List.generate(10, (index) {
-                        return ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            padding: const EdgeInsets.all(8),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              color: Color(0xFF7D8554),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Hello Mario!\nReady to cook with what's in your kitchen?",
+                          style: TextStyle(color: Colors.white),
+                            textAlign: TextAlign.left,
                           ),
-                          onPressed: () {},
-                          child: const Icon(
-                            Icons.food_bank,
-                            color: Colors.green,
-                            size: 32,
-                          ),
-                        );
-                      })
-                    ],
-                  )
+                          Image.asset("assets/images/chef.png", height: 100,),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Image.asset(
+                        'assets/images/image_1.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ],
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: const Size(50, 200),
-                    backgroundColor: Colors.green,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            Row(
+              //immagine persona e testo+bottone
+            ),
+            Text("whats in the fridge", textAlign: TextAlign.left,),
+            Container(
+              padding: EdgeInsets.all(8),
+              height: 150,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 5,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      children: [
+                        ...List.generate(10, (index) {
+                          return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              padding: const EdgeInsets.all(8),
+                            ),
+                            onPressed: () {},
+                            child: const Icon(
+                              Icons.food_bank,
+                              color: Colors.green,
+                              size: 32,
+                            ),
+                          );
+                        }),
+                      ],
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => FoodListPage()),
-                    );
-                  },
-                  child: const Icon(Icons.add),
-                ),
-              ],
-              
-              //elenco di ingredienti e tasto +
+                  const SizedBox(width: 10),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: const Size(40, 110),
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => FoodListPage()),
+                      );
+                    },
+                    child: const Icon(Icons.add),
+                  ),
+                ],
+
+                //elenco di ingredienti e tasto +
+              ),
             ),
-            
-          ),
-          ElevatedButton(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox( width: double.infinity,
+                child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(20),
+                      
                     ),
                   ),
-                  onPressed: () {
-                    
-                  },
-                  child: Text("Let the cooking Beguin"),
+                  onPressed: () {},
+                  child: Text("Let the cooking Begin"),
                 ),
-          Text("recipe of the day"),
-          Image.asset('assets/images/repice_day.png')
-          // piatto del giorno
-        ],
+              ),
+            ),
+            Text("recipe of the day"),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset('assets/images/recipe_day.png', fit: BoxFit.fitWidth,),
+            ),
+            // piatto del giorno
+          ],
+        ),
       ),
       bottomNavigationBar: const BottomBar(),
     );
