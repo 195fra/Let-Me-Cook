@@ -17,11 +17,19 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Container( color: Color(0xFF7D8554),
-            child: Row( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: 
+            Row( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
-            
               children: [
-              Text("Hello Mario! \nReady to cook with what's in you kitchen?"),
+                Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: Text("Hello Mario! \nReady to cook with what's in you kitchen?",                       
+            )
+            ),
+            Image.asset("assets/images/chef.png",height: 100,),
+            ],
+            ),     
               Image.asset('assets/images/image_1.png')
             ],
             ),
@@ -81,10 +89,25 @@ class _HomePageState extends State<HomePage> {
                   child: const Icon(Icons.add),
                 ),
               ],
+              
               //elenco di ingredienti e tasto +
             ),
+            
           ),
+          ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  onPressed: () {
+                    
+                  },
+                  child: Text("Let the cooking Beguin"),
+                ),
           Text("recipe of the day"),
+          Image.asset('assets/images/repice_day.png')
           // piatto del giorno
         ],
       ),
