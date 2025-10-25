@@ -36,7 +36,7 @@ class FoodListViewModel {
   // Carica la lista delle ricette dal JSON
   Future<void> loadFoodList() async {
     // Caricamento JSON da assets, se necessario, rimuovi se già presente nella UI
-    String jsonString = await rootBundle.loadString("recipes.json");
+    String jsonString = await rootBundle.loadString("assets/recipes.json");
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     List<dynamic> foodListJson = jsonMap['food list'];
     List<FoodItem> items = foodListJson

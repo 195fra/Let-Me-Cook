@@ -161,7 +161,7 @@ class _FoodListPageState extends State<FoodListPage> {
                 ),
               ],
             ),
-            bottomNavigationBar: const BottomBar(),
+      bottomNavigationBar: const BottomBar(),
     );
   }
 }
