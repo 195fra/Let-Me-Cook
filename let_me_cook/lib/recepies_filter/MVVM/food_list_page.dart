@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:let_me_cook/recepies_filter/MVVM/filtered_recipes.dart';
 import 'package:let_me_cook/recepies_filter/MVVM/food_list_viewmodel.dart';
-import 'package:let_me_cook/components/bottom_bar.dart';
 
 class FoodListPage extends StatefulWidget {
   @override
@@ -21,7 +20,7 @@ class _FoodListPageState extends State<FoodListPage> {
     });
   }
 
-  Widget _buildIngredientButton(String ingredient) {
+  Widget ingredientButton(String ingredient) {
     return ElevatedButton(
       onPressed: () {
         setState(() => viewModel.toggleIngredient(ingredient));
@@ -33,19 +32,27 @@ class _FoodListPageState extends State<FoodListPage> {
     );
   }
 
-  Widget _buildCategoryList(String category, List<String> ingredients) {
-    return ExpansionTile(
-      title: Text(category, style: TextStyle(fontWeight: FontWeight.bold)),
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: ingredients.map((i) => _buildIngredientButton(i)).toList(),
+  // categorie ingredienti
+  Widget categoryList(String category, List<String> ingredients) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: ExpansionTile(
+        title: Text(category, style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+        showTrailingIcon: false,
+        collapsedBackgroundColor: Color(0xFFC8B897),
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: ingredients
+                  .map((i) => ingredientButton(i))
+                  .toList(),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -54,7 +61,7 @@ class _FoodListPageState extends State<FoodListPage> {
     if (ingredient.isEmpty) return;
 
     setState(() {
-      if (viewModel.currentAction == 'Aggiungi') {
+      if (viewModel.currentAction == 'Add') {
         viewModel.selectedIncludeIngredients.add(ingredient);
         viewModel.selectedExcludeIngredients.remove(ingredient);
       } else {
@@ -66,16 +73,21 @@ class _FoodListPageState extends State<FoodListPage> {
     });
   }
 
-  // Versione aggiornata: scroll orizzontale
-  Widget _buildManualIngredientList(String title, Set<String> ingredients, Color color) {
-    if (ingredients.isEmpty) return SizedBox.shrink(); // niente da mostrare
-
+  Widget _buildManualIngredientList(
+    String title,
+    Set<String> ingredients,
+    Color color,
+  ) {
+    if (ingredients.isEmpty) return SizedBox.shrink(); 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+          Text(
+            title,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
           const SizedBox(height: 8),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -85,7 +97,6 @@ class _FoodListPageState extends State<FoodListPage> {
                   padding: const EdgeInsets.only(right: 8),
                   child: Chip(
                     label: Text(ingredient),
-                    backgroundColor: color.withOpacity(0.2),
                     deleteIcon: Icon(Icons.close),
                     onDeleted: () {
                       setState(() {
@@ -111,34 +122,42 @@ class _FoodListPageState extends State<FoodListPage> {
           ? Center(child: CircularProgressIndicator())
           : Column(
               children: [
-                // Selettore modalità Aggiungi/Togli
+                // Selettore modalità Add/Remove
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
-                        onPressed: () => setState(() => viewModel.setAction('Aggiungi')),
+                        onPressed: () =>
+                            setState(() => viewModel.setAction('Add')),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: viewModel.currentAction == 'Aggiungi' ? Colors.green : Colors.grey,
+                          backgroundColor: viewModel.currentAction == 'Add'
+                              ? Colors.green
+                              : Color(0xFFCCCCCC),
                         ),
-                        child: Text('Aggiungi'),
+                        child: Text('Add'),
                       ),
                       SizedBox(width: 16),
                       ElevatedButton(
-                        onPressed: () => setState(() => viewModel.setAction('Togli')),
+                        onPressed: () =>
+                            setState(() => viewModel.setAction('Remove')),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: viewModel.currentAction == 'Togli' ? Colors.red : Colors.grey,
+                          backgroundColor: viewModel.currentAction == 'Remove'
+                              ? Colors.red
+                              : Color(0xFFCCCCCC),
                         ),
-                        child: Text('Togli'),
+                        child: Text('Remove'),
                       ),
                     ],
                   ),
                 ),
 
-                // Campo testo per aggiungere/togliere ingrediente
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   child: Row(
                     children: [
                       Expanded(
@@ -146,7 +165,7 @@ class _FoodListPageState extends State<FoodListPage> {
                           controller: ingredientController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Scrivi ingrediente',
+                            labelText: 'Search for more',
                           ),
                         ),
                       ),
@@ -154,19 +173,18 @@ class _FoodListPageState extends State<FoodListPage> {
                       ElevatedButton(
                         onPressed: _handleAddTextIngredient,
                         child: Text(viewModel.currentAction),
-                      )
+                      ),
                     ],
                   ),
                 ),
 
-                // Lista ingredienti aggiunti manualmente (scrollabile orizzontalmente)
                 _buildManualIngredientList(
-                  'Ingredienti da includere:',
+                  'Ingredients to include:',
                   viewModel.selectedIncludeIngredients,
                   Colors.green,
                 ),
                 _buildManualIngredientList(
-                  'Ingredienti da escludere:',
+                  'Ingredients to remove:',
                   viewModel.selectedExcludeIngredients,
                   Colors.red,
                 ),
@@ -175,7 +193,7 @@ class _FoodListPageState extends State<FoodListPage> {
                 Expanded(
                   child: ListView(
                     children: viewModel.ingredientCategories.entries
-                        .map((e) => _buildCategoryList(e.key, e.value))
+                        .map((e) => categoryList(e.key, e.value))
                         .toList(),
                   ),
                 ),
@@ -208,9 +226,7 @@ class _FoodListPageState extends State<FoodListPage> {
                   ),
                 ),
               ],
-              
             ),
-      //bottomNavigationBar: const BottomBar(),
     );
   }
 }

@@ -21,7 +21,7 @@ class FoodListViewModel {
   Set<String> selectedIncludeIngredients = {};
   Set<String> selectedExcludeIngredients = {};
 
-  String currentAction = 'Aggiungi';
+  String currentAction = 'Add';
 
   Future<void> loadFoodList() async {
     String jsonString = await rootBundle.loadString("assets/recipes.json");
@@ -51,7 +51,7 @@ class FoodListViewModel {
   }
 
   void toggleIngredient(String ingredient) {
-    if (currentAction == 'Aggiungi') {
+    if (currentAction == 'Add') {
       if (selectedIncludeIngredients.contains(ingredient)) {
         selectedIncludeIngredients.remove(ingredient);
       } else {
@@ -70,10 +70,10 @@ class FoodListViewModel {
   }
 
   Color getIngredientButtonColor(String ingredient) {
-    if (currentAction == 'Aggiungi') {
-      return selectedIncludeIngredients.contains(ingredient) ? Colors.green : Colors.grey;
+    if (currentAction == 'Add') {
+      return selectedIncludeIngredients.contains(ingredient) ? Colors.green : Color(0xFFCCCCCC);
     } else {
-      return selectedExcludeIngredients.contains(ingredient) ? Colors.red : Colors.grey;
+      return selectedExcludeIngredients.contains(ingredient) ? Colors.red : Color(0xFFCCCCCC);
     }
   }
 }
