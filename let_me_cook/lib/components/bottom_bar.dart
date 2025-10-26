@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:let_me_cook/Pages/appetizer_category.dart';
+import 'package:let_me_cook/Pages/recipe_journal.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
@@ -24,7 +26,10 @@ class BottomBar extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.book),
             onPressed: () {
-              Navigator.pushNamed(context, '');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => RecipeJournal()),
+              );
             },
           ),
           IconButton(
