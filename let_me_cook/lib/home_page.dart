@@ -1,11 +1,9 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:let_me_cook/Pages/Recipe_page.dart';
 import 'package:let_me_cook/components/bottom_bar.dart';
+import 'package:let_me_cook/home_viewmodel.dart';
 import 'package:let_me_cook/recepies_filter/MVVM/filtered_recipes.dart';
 import 'package:let_me_cook/recepies_filter/MVVM/food_list_page.dart';
-import 'package:let_me_cook/recepies_filter/MVVM/food_list_viewmodel.dart';
-import 'package:let_me_cook/recepies_filter/food_item.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,35 +12,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final FoodListViewModel viewModel = FoodListViewModel();
-  FoodItem? randomRecipe;
-
-  @override
-  void initState() {
-    super.initState();
-    // Carica le ricette e seleziona una ricetta del giorno una sola volta
-    viewModel.loadFoodList().then((_) {
-      if (viewModel.allFoodItems.isNotEmpty) {
-        setState(() {
-          randomRecipe = viewModel
-              .allFoodItems[Random().nextInt(viewModel.allFoodItems.length)];
-        });
-      }
-    });
-    viewModel.setAction('Add'); // for the ingredients button color
-  }
-
-  // Ingredienti iniziali comuni
-  final List<String> fridgeIngredients = [
-    'Tomato',
-    'Beef',
-    'Lemon',
-    'Pasta',
-    'Pepper',
-    'Salt',
-  ];
-
+class _HomePageState extends State<HomePage> with HomeViewmodel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +20,7 @@ class _HomePageState extends State<HomePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              // Header
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Container(
@@ -105,11 +76,12 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-              Align(
+              // “What's in the fridge”
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: const Text(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
                     "What's in the fridge",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
@@ -187,6 +159,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
+              // Bottone “Let the cooking Begin”
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
@@ -221,6 +194,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
+              // “Recipe of the day”
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
