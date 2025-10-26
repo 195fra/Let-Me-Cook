@@ -25,8 +25,8 @@ class FilteredRecipesPage extends StatelessWidget {
                       children: [
                         Text(foodItem.title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                         SizedBox(height: 8),
-                        Text('Ingredients:', style: TextStyle(fontWeight: FontWeight.bold)),
-                        ...foodItem.ingredients.map((i) => Text('- $i')).toList(),
+                        //Text('Ingredients:', style: TextStyle(fontWeight: FontWeight.bold)),
+                        //...foodItem.ingredients.map((i) => Text('- $i')).toList(),
                       ],
                     ),
                   ),

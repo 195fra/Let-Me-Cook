@@ -66,29 +66,37 @@ class _FoodListPageState extends State<FoodListPage> {
     });
   }
 
+  // Versione aggiornata: scroll orizzontale
   Widget _buildManualIngredientList(String title, Set<String> ingredients, Color color) {
+    if (ingredients.isEmpty) return SizedBox.shrink(); // niente da mostrare
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (ingredients.isNotEmpty)
-            Text(title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-          Wrap(
-            spacing: 8,
-            children: ingredients.map((ingredient) {
-              return Chip(
-                label: Text(ingredient),
-                backgroundColor: color.withOpacity(0.2),
-                deleteIcon: Icon(Icons.close),
-                onDeleted: () {
-                  setState(() {
-                    ingredients.remove(ingredient);
-                    viewModel.filterRecipes();
-                  });
-                },
-              );
-            }).toList(),
+          Text(title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+          const SizedBox(height: 8),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: ingredients.map((ingredient) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: Chip(
+                    label: Text(ingredient),
+                    backgroundColor: color.withOpacity(0.2),
+                    deleteIcon: Icon(Icons.close),
+                    onDeleted: () {
+                      setState(() {
+                        ingredients.remove(ingredient);
+                        viewModel.filterRecipes();
+                      });
+                    },
+                  ),
+                );
+              }).toList(),
+            ),
           ),
         ],
       ),
@@ -151,7 +159,7 @@ class _FoodListPageState extends State<FoodListPage> {
                   ),
                 ),
 
-                // Lista ingredienti aggiunti manualmente
+                // Lista ingredienti aggiunti manualmente (scrollabile orizzontalmente)
                 _buildManualIngredientList(
                   'Ingredienti da includere:',
                   viewModel.selectedIncludeIngredients,
@@ -174,24 +182,35 @@ class _FoodListPageState extends State<FoodListPage> {
 
                 // Pulsante per navigare alle ricette filtrate
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => FilteredRecipesPage(
-                            filteredFoodItems: viewModel.filteredFoodItems,
-                          ),
+                  padding: const EdgeInsets.all(20),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                      );
-                    },
-                    child: Text('Mostra ricette filtrate'),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => FilteredRecipesPage(
+                              filteredFoodItems: viewModel.filteredFoodItems,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text("Let the cooking Begin"),
+                    ),
                   ),
                 ),
               ],
+              
             ),
-      bottomNavigationBar: const BottomBar(),
+      //bottomNavigationBar: const BottomBar(),
     );
   }
 }

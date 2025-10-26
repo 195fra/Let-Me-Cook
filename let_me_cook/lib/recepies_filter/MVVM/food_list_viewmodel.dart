@@ -11,9 +11,11 @@ class FoodListViewModel {
   String excludeText = '';
 
   Map<String, List<String>> ingredientCategories = {
-    'Vegetables': ['Tomato', 'Lettuce', 'Garlic', 'Onion', 'Olive', 'Cucumber', 'Pepper', 'Mushroom', 'Carrot', 'Spinach'],
-    'Meat': ['Chicken', 'Beef', 'Bacon'],
-    'Other': ['Cheese', 'Pasta', 'Rice'],
+    'Vegetables': ['Tomato', 'Onion', 'Potato', 'Zucchini', 'Pepper'],
+    'Meat': ['Chicken', 'Beef', 'Pork', 'Srimp','fish'],
+    'Condiments': ['Vinegar', 'Ketchup', 'Mayonnaise', 'Olive Oil', 'Salt'],
+    'Fruits': ['Lemon', 'Lime', 'Apple', 'Pineapple', 'Nuts'],
+    'Grains': ['Flour', 'Pasta', 'Tagliatelle', 'Noodles', 'Macaroni'],
   };
 
   Set<String> selectedIncludeIngredients = {};
