@@ -7,6 +7,7 @@ class FoodListElement extends StatefulWidget {
   final bool isFavorite;
   final Function(bool) onFavoriteChanged;
 
+
   const FoodListElement({
     Key? key,
     required this.title,

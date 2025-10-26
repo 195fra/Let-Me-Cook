@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:let_me_cook/components/FoodListElement.dart';
+
+import '../components/FoodListElement.dart';
+
 
 class FavouritePage extends StatefulWidget {
   const FavouritePage({super.key});

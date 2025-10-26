@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:let_me_cook/recepies_filter/food_item.dart';
+import 'package:let_me_cook/data/food_item.dart';
 
 class FoodListViewModel {
   List<FoodItem> allFoodItems = [];

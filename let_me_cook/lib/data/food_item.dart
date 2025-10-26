@@ -1,0 +1,47 @@
+class FoodItem {
+  final String title;
+  final List<String> directions;
+  final List<String> ingredients;
+  final String language;
+  final String source;
+  final List<String> tags;
+  final String url;
+  final String category;
+
+  FoodItem({
+    required this.title,
+    required this.directions,
+    required this.ingredients,
+    required this.language,
+    required this.source,
+    required this.tags,
+    required this.url,
+    required this.category,
+  });
+
+  factory FoodItem.fromJson(Map<String, dynamic> json) {
+    return FoodItem(
+      title: json['title'] ?? '',
+      directions: List<String>.from(json['directions'] ?? []),
+      ingredients: List<String>.from(json['ingredients'] ?? []),
+      language: json['language'] ?? '',
+      source: json['source'] ?? '',
+      tags: List<String>.from(json['tags'] ?? []),
+      url: json['url'] ?? '',
+      category: json['category'] ?? '',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'directions': directions,
+      'ingredients': ingredients,
+      'language': language,
+      'source': source,
+      'tags': tags,
+      'url': url,
+      'category': category,
+    };
+  }
+}
