@@ -1,25 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:let_me_cook/components/FoodListElement.dart';
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+class FavouritePage extends StatefulWidget {
+  const FavouritePage({super.key});
+
+  @override
+  State<FavouritePage> createState() => _FavouritePageState();
+}
+
+class _FavouritePageState extends State<FavouritePage> {
+  String selectedCategory = 'All';
+  final List<Map<String, dynamic>> favoriteItems = [
+    {'isFavorite': true},
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Your Faves")),
+      appBar: AppBar(title: const Text('Your Faves')),
       body: Column(
         children: [
-          CarouselView(
-            itemExtent: 20,
-            children: [
-              SizedBox(child: Text('Appetizer')),
-              SizedBox(child: Text('First Course')),
-              SizedBox(child: Text('Main Course')),
-              SizedBox(child: Text('Side Dish')),
-              SizedBox(child: Text('Dessert')),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+            child: Row(
+              children: [
+                buildCategoryChip('All'),
+                buildCategoryChip('Appetizer'),
+                buildCategoryChip('First Course'),
+                buildCategoryChip('Main Course'),
+                buildCategoryChip('Side Dish'),
+                buildCategoryChip('Dessert'),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: favoriteItems.length,
+              itemBuilder: (context, index) {
+                final item = favoriteItems[index];
+                if (selectedCategory == 'All' ||
+                    selectedCategory == item['category']) {
+                  return FoodListElement(
+                    title: item['title'],
+                    imageUrl: item['imageUrl'],
+                    isFavorite: item['isFavorite'],
+                    onFavoriteChanged: (bool newValue) {
+                      setState(() {
+                        item['isFavorite'] = newValue;
+                        // Here you would typically update your database or state management
+                      });
+                    },
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget buildCategoryChip(String category) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6),
+      child: ChoiceChip(
+        label: Text(category),
+        selected: selectedCategory == category,
+        onSelected: (bool selected) {
+          setState(() {
+            selectedCategory = category;
+          });
+        },
       ),
     );
   }
