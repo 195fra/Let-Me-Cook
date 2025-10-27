@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:let_me_cook/Pages/appetizer_category.dart';
 import 'package:let_me_cook/Pages/recipe_journal.dart';
 
 class BottomBar extends StatelessWidget {
