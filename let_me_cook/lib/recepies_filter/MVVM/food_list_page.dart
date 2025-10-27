@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:let_me_cook/recepies_filter/MVVM/filtered_recipes.dart';
 import 'package:let_me_cook/recepies_filter/MVVM/food_list_viewmodel.dart';
-//import 'package:let_me_cook/recepies_filter/food_item.dart';
-import 'package:let_me_cook/components/bottom_bar.dart';
 
 class FoodListPage extends StatefulWidget {
   @override
@@ -10,6 +9,7 @@ class FoodListPage extends StatefulWidget {
 
 class _FoodListPageState extends State<FoodListPage> {
   late FoodListViewModel viewModel;
+  final TextEditingController ingredientController = TextEditingController();
 
   @override
   void initState() {
@@ -20,148 +20,213 @@ class _FoodListPageState extends State<FoodListPage> {
     });
   }
 
+  Widget ingredientButton(String ingredient) {
+    return ElevatedButton(
+      onPressed: () {
+        setState(() => viewModel.toggleIngredient(ingredient));
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: viewModel.getIngredientButtonColor(ingredient),
+      ),
+      child: Text(ingredient),
+    );
+  }
+
+  // categorie ingredienti
+  Widget categoryList(String category, List<String> ingredients) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: ExpansionTile(
+        title: Text(category, style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+        showTrailingIcon: false,
+        collapsedBackgroundColor: Color(0xFFC8B897),
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: ingredients
+                  .map((i) => ingredientButton(i))
+                  .toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _handleAddTextIngredient() {
+    final ingredient = ingredientController.text.trim();
+    if (ingredient.isEmpty) return;
+
+    setState(() {
+      if (viewModel.currentAction == 'Add') {
+        viewModel.selectedIncludeIngredients.add(ingredient);
+        viewModel.selectedExcludeIngredients.remove(ingredient);
+      } else {
+        viewModel.selectedExcludeIngredients.add(ingredient);
+        viewModel.selectedIncludeIngredients.remove(ingredient);
+      }
+      viewModel.filterRecipes();
+      ingredientController.clear();
+    });
+  }
+
+  Widget _buildManualIngredientList(
+    String title,
+    Set<String> ingredients,
+    Color color,
+  ) {
+    if (ingredients.isEmpty) return SizedBox.shrink(); 
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
+          const SizedBox(height: 8),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: ingredients.map((ingredient) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: Chip(
+                    label: Text(ingredient),
+                    deleteIcon: Icon(Icons.close),
+                    onDeleted: () {
+                      setState(() {
+                        ingredients.remove(ingredient);
+                        viewModel.filterRecipes();
+                      });
+                    },
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Food Recipes')),
+      appBar: AppBar(title: Text('Food Recipes Filter')),
       body: viewModel.allFoodItems.isEmpty
           ? Center(child: CircularProgressIndicator())
           : Column(
               children: [
-                // Filtro con i bottoni degli ingredienti
+                // Selettore modalità Add/Remove
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: viewModel.availableIngredients.map((
-                        ingredient,
-                      ) {
-                        final isIncluded = viewModel.selectedIncludeIngredients
-                            .contains(ingredient);
-                        final isExcluded = viewModel.selectedExcludeIngredients
-                            .contains(ingredient);
-
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                          child: Column(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  viewModel.toggleIncludeIngredient(ingredient);
-                                  setState(() {
-                                    // Dopo il cambio dello stato, rifai il filtro
-                                    viewModel.filterRecipes();
-                                  });
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: isIncluded
-                                      ? Colors.green
-                                      : Colors.blue,
-                                ),
-                                child: Text(ingredient),
-                              ),
-                              SizedBox(height: 4),
-                              ElevatedButton(
-                                onPressed: () {
-                                  viewModel.toggleExcludeIngredient(ingredient);
-                                  setState(() {
-                                    // Dopo il cambio dello stato, rifai il filtro
-                                    viewModel.filterRecipes();
-                                  });
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: isExcluded
-                                      ? Colors.red
-                                      : Colors.blue,
-                                ),
-                                child: Text('Exclude $ingredient'),
-                              ),
-                            ],
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ),
-
-                // Campi di testo per l'inclusione e l'esclusione
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextField(
-                        decoration: InputDecoration(
-                          labelText: 'Include ingredients (comma separated)',
-                          border: OutlineInputBorder(),
+                      ElevatedButton(
+                        onPressed: () =>
+                            setState(() => viewModel.setAction('Add')),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: viewModel.currentAction == 'Add'
+                              ? Colors.green
+                              : Color(0xFFCCCCCC),
                         ),
-                        onChanged: (value) {
-                          viewModel.includeText = value;
-                          viewModel.filterRecipes();
-                          setState(() {}); // Rende reattiva la UI
-                        },
+                        child: Text('Add'),
                       ),
-                      SizedBox(height: 8),
-                      TextField(
-                        decoration: InputDecoration(
-                          labelText: 'Exclude ingredients (comma separated)',
-                          border: OutlineInputBorder(),
+                      SizedBox(width: 16),
+                      ElevatedButton(
+                        onPressed: () =>
+                            setState(() => viewModel.setAction('Remove')),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: viewModel.currentAction == 'Remove'
+                              ? Colors.red
+                              : Color(0xFFCCCCCC),
                         ),
-                        onChanged: (value) {
-                          viewModel.excludeText = value;
-                          viewModel.filterRecipes();
-                          setState(() {}); // Rende reattiva la UI
-                        },
+                        child: Text('Remove'),
                       ),
                     ],
                   ),
                 ),
 
-                // Lista delle ricette filtrate
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: viewModel.filteredFoodItems.length,
-                    itemBuilder: (context, index) {
-                      final foodItem = viewModel.filteredFoodItems[index];
-                      return Card(
-                        margin: EdgeInsets.all(8),
-                        child: Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                foodItem.title,
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                "Ingredients:",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: foodItem.ingredients
-                                    .map((ingredient) => Text('- $ingredient'))
-                                    .toList(),
-                              ),
-                            ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: ingredientController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Search for more',
                           ),
                         ),
-                      );
-                    },
+                      ),
+                      SizedBox(width: 8),
+                      ElevatedButton(
+                        onPressed: _handleAddTextIngredient,
+                        child: Text(viewModel.currentAction),
+                      ),
+                    ],
+                  ),
+                ),
+
+                _buildManualIngredientList(
+                  'Ingredients to include:',
+                  viewModel.selectedIncludeIngredients,
+                  Colors.green,
+                ),
+                _buildManualIngredientList(
+                  'Ingredients to remove:',
+                  viewModel.selectedExcludeIngredients,
+                  Colors.red,
+                ),
+
+                // Lista categorie ingredienti
+                Expanded(
+                  child: ListView(
+                    children: viewModel.ingredientCategories.entries
+                        .map((e) => categoryList(e.key, e.value))
+                        .toList(),
+                  ),
+                ),
+
+                // Pulsante per navigare alle ricette filtrate
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => FilteredRecipesPage(
+                              filteredFoodItems: viewModel.filteredFoodItems,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text("Let the cooking Begin"),
+                    ),
                   ),
                 ),
               ],
             ),
-      bottomNavigationBar: const BottomBar(),
     );
   }
 }
