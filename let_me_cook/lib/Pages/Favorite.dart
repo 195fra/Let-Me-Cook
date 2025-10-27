@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:let_me_cook/components/FoodListElement.dart';
 import 'package:let_me_cook/components/bottom_bar.dart';
 import 'package:let_me_cook/components/favourites_service.dart';
-import 'package:let_me_cook/recepies_filter/food_item.dart';
+import 'package:let_me_cook/data/food_item.dart';
 import 'package:let_me_cook/Pages/Recipe_page.dart';
 
 class FavouritePage extends StatefulWidget {
@@ -19,6 +19,8 @@ class _FavouritePageState extends State<FavouritePage> {
   final Map<String, bool> favorites = {};
   final FavoritesService _favoritesService = FavoritesService();
 
+  late List<FoodItem> favoriteItems = [];
+
   @override
   void initState() {
     super.initState();
@@ -30,12 +32,18 @@ class _FavouritePageState extends State<FavouritePage> {
     setState(() {
       favorites.clear();
       favorites.addAll(loadedFavorites);
+      favoriteItems = widget.allItems
+          .where((item) => favorites[item.title] == true)
+          .toList();
     });
   }
 
   Future<void> _toggleFavorite(String title) async {
     await _favoritesService.toggleFavorite(favorites, title);
     setState(() {});
+    favoriteItems = widget.allItems
+        .where((item) => favorites[item.title] == true)
+        .toList();
   }
 
   @override
@@ -60,9 +68,9 @@ class _FavouritePageState extends State<FavouritePage> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: widget.allItems.length,
+              itemCount: favoriteItems.length,
               itemBuilder: (context, index) {
-                final item = widget.allItems[index];
+                final item = favoriteItems[index];
                 final isFav = favorites[item.title] ?? false;
 
                 if (selectedCategory == 'All' ||

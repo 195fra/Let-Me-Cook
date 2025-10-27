@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:let_me_cook/Pages/Favorite.dart';
 import 'package:let_me_cook/Pages/recipe_journal.dart';
+import 'package:let_me_cook/data/food_item.dart';
+import 'package:let_me_cook/data/food_repository.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
@@ -18,8 +21,14 @@ class BottomBar extends StatelessWidget {
           ),
           IconButton(
             icon: Icon(Icons.favorite_border),
-            onPressed: () {
-              Navigator.pushNamed(context, '');
+            onPressed: () async {
+              final List<FoodItem> foodItems = await loadFoodItemsFromJson();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => FavouritePage(allItems: foodItems),
+                ),
+              );
             },
           ),
           IconButton(
