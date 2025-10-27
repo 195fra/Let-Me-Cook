@@ -1,11 +1,9 @@
-// dart
 import 'package:flutter/material.dart';
 import 'package:let_me_cook/components/FoodListElement.dart';
 import 'package:let_me_cook/components/bottom_bar.dart';
 import 'package:let_me_cook/components/favourites_service.dart';
 import 'package:let_me_cook/data/food_item.dart';
 import 'package:let_me_cook/Pages/Recipe_page.dart';
-import 'package:let_me_cook/components/category_header.dart';
 
 class FavouritePage extends StatefulWidget {
   final List<FoodItem> allItems;
@@ -21,6 +19,7 @@ class _FavouritePageState extends State<FavouritePage> {
   final Map<String, bool> favorites = {};
   final FavoritesService _favoritesService = FavoritesService();
 
+  // lista visibile dei preferiti (ricomputata ogni volta che cambiano i favoriti)
   late List<FoodItem> favoriteItems = [];
 
   @override
@@ -32,8 +31,10 @@ class _FavouritePageState extends State<FavouritePage> {
   Future<void> _loadFavorites() async {
     final loadedFavorites = await _favoritesService.loadFavorites();
     setState(() {
-      favorites.clear();
-      favorites.addAll(loadedFavorites);
+      favorites
+        ..clear()
+        ..addAll(loadedFavorites);
+      // popola la lista visibile basandosi sulla mappa dei preferiti
       favoriteItems = widget.allItems
           .where((item) => favorites[item.title] == true)
           .toList();
@@ -41,59 +42,76 @@ class _FavouritePageState extends State<FavouritePage> {
   }
 
   Future<void> _toggleFavorite(String title) async {
+    // aggiorna e salva tramite il service
     await _favoritesService.toggleFavorite(favorites, title);
-    setState(() {});
-    favoriteItems = widget.allItems
-        .where((item) => favorites[item.title] == true)
-        .toList();
+    // ricomputa la lista visibile e forza rebuild
+    setState(() {
+      favoriteItems = widget.allItems
+          .where((item) => favorites[item.title] == true)
+          .toList();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            CategoryHeader(
-              title: "Your Faves",
-              category: "favourites",
-              searchValue: '',
-              onSearchChanged: (_) {},
-              backgroundColor: const Color(0xFF5F4B3B),
-              showSearchBar: false,
-              showBackButton: false,
+      appBar: AppBar(title: const Text('Your Faves')),
+      body: Column(
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+            child: Row(
+              children: [
+                buildCategoryChip('All'),
+                buildCategoryChip('Appetizer'),
+                buildCategoryChip('First Course'),
+                buildCategoryChip('Main Course'),
+                buildCategoryChip('Side Dish'),
+                buildCategoryChip('Dessert'),
+              ],
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-              child: Row(
-                children: [
-                  buildCategoryChip('All'),
-                  buildCategoryChip('Appetizer'),
-                  buildCategoryChip('First Course'),
-                  buildCategoryChip('Main Course'),
-                  buildCategoryChip('Side Dish'),
-                  buildCategoryChip('Dessert'),
-                ],
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: favoriteItems.length,
-                itemBuilder: (context, index) {
-                  final item = favoriteItems[index];
-                  final isFav = favorites[item.title] ?? false;
+          ),
+          Expanded(
+            child: Builder(
+              builder: (context) {
+                if (favoriteItems.isEmpty) {
+                  return const Center(child: Text('No favorites yet'));
+                }
 
-                  if (selectedCategory == 'All' ||
-                      selectedCategory.toLowerCase() ==
-                          item.category.toLowerCase()) {
+                // applica filtro di categoria alla lista già filtrata per preferiti
+                final visible = selectedCategory == 'All'
+                    ? favoriteItems
+                    : favoriteItems
+                          .where(
+                            (i) =>
+                                i.category.trim().toLowerCase() ==
+                                selectedCategory.trim().toLowerCase(),
+                          )
+                          .toList();
+
+                if (visible.isEmpty) {
+                  return const Center(
+                    child: Text('No favorites in this category'),
+                  );
+                }
+
+                return ListView.separated(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  itemCount: visible.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 8),
+                  itemBuilder: (context, index) {
+                    final item = visible[index];
+                    final isFav = favorites[item.title] ?? false;
+
                     return FoodListElement(
                       title: item.title,
                       isFavorite: isFav,
-                      onFavoriteChanged: (bool newValue) async {
+                      onFavoriteChanged: (newValue) async {
                         await _toggleFavorite(item.title);
                       },
                       onTap: () {
+                        if (!mounted) return;
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -102,13 +120,12 @@ class _FavouritePageState extends State<FavouritePage> {
                         );
                       },
                     );
-                  }
-                  return const SizedBox.shrink();
-                },
-              ),
+                  },
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       bottomNavigationBar: const BottomBar(),
     );

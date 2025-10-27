@@ -83,7 +83,8 @@ class _RecipeJournalState extends State<RecipeJournal> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CategoryPage(category: category),
+                              builder: (context) =>
+                                  CategoryPage(category: category),
                             ),
                           );
                         },
