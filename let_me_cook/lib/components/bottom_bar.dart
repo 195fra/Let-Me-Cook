@@ -3,6 +3,7 @@ import 'package:let_me_cook/Pages/Favorite.dart';
 import 'package:let_me_cook/Pages/recipe_journal.dart';
 import 'package:let_me_cook/data/food_item.dart';
 import 'package:let_me_cook/data/food_repository.dart';
+import 'package:let_me_cook/home_page.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key});
@@ -16,7 +17,10 @@ class BottomBar extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.home),
             onPressed: () {
-              Navigator.pushNamed(context, '');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
             },
           ),
           IconButton(

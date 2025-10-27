@@ -69,12 +69,11 @@ class _RecipeJournalState extends State<RecipeJournal> {
               ),
             ),
             const SizedBox(height: 12),
-            SizedBox(
-              height: 200,
+            Expanded(
               child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
+                scrollDirection: Axis.vertical,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
+                child: Column(
                   children: categories.map((category) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -93,12 +92,12 @@ class _RecipeJournalState extends State<RecipeJournal> {
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: SizedBox(
-                            width: 145,
-                            height: 200,
+                            width: double.infinity,
+                            height: 100,
                             child: Padding(
                               padding: const EdgeInsets.all(16),
                               child: Align(
-                                alignment: Alignment.bottomLeft,
+                                alignment: Alignment.center,
                                 child: Text(
                                   category.toUpperCase(),
                                   style: const TextStyle(
@@ -121,6 +120,7 @@ class _RecipeJournalState extends State<RecipeJournal> {
           ],
         ),
       ),
+      bottomNavigationBar: const BottomBar(),
     );
   }
 }
