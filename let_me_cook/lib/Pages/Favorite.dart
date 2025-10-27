@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:let_me_cook/components/FoodListElement.dart';
 import 'package:let_me_cook/components/bottom_bar.dart';
+import 'package:let_me_cook/components/favourites_service.dart';
 import 'package:let_me_cook/recepies_filter/food_item.dart';
 import 'package:let_me_cook/Pages/Recipe_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class FavouritePage extends StatefulWidget {
   final List<FoodItem> allItems;
@@ -16,16 +16,8 @@ class FavouritePage extends StatefulWidget {
 
 class _FavouritePageState extends State<FavouritePage> {
   String selectedCategory = 'All';
-
-  final List<Map<String, dynamic>> favoriteItems = [
-    {
-      'title': 'Bruschette',
-      'imageUrl': 'https://example.com/bruschette.jpg',
-      'category': 'Appetizer',
-    },
-  ];
-
   final Map<String, bool> favorites = {};
+  final FavoritesService _favoritesService = FavoritesService();
 
   @override
   void initState() {
@@ -34,30 +26,16 @@ class _FavouritePageState extends State<FavouritePage> {
   }
 
   Future<void> _loadFavorites() async {
-    final prefs = await SharedPreferences.getInstance();
-    final List<String>? saved = prefs.getStringList('favorites');
-    if (saved != null) {
-      setState(() {
-        favorites.clear();
-        for (var t in saved) {
-          favorites[t] = true;
-        }
-      });
-    } else {
-      setState(() {
-        favorites['Bruschette'] = true;
-      });
-      await _saveFavorites();
-    }
+    final loadedFavorites = await _favoritesService.loadFavorites();
+    setState(() {
+      favorites.clear();
+      favorites.addAll(loadedFavorites);
+    });
   }
 
-  Future<void> _saveFavorites() async {
-    final prefs = await SharedPreferences.getInstance();
-    final List<String> keys = favorites.entries
-        .where((e) => e.value)
-        .map((e) => e.key)
-        .toList();
-    await prefs.setStringList('favorites', keys);
+  Future<void> _toggleFavorite(String title) async {
+    await _favoritesService.toggleFavorite(favorites, title);
+    setState(() {});
   }
 
   @override
@@ -82,42 +60,27 @@ class _FavouritePageState extends State<FavouritePage> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: favoriteItems.length,
+              itemCount: widget.allItems.length,
               itemBuilder: (context, index) {
-                final item = favoriteItems[index];
-                final title = (item['title'] as String);
-                final isFav = favorites[title] ?? false;
+                final item = widget.allItems[index];
+                final isFav = favorites[item.title] ?? false;
 
                 if (selectedCategory == 'All' ||
-                    selectedCategory == item['category']) {
+                    selectedCategory.toLowerCase() ==
+                        item.category.toLowerCase()) {
                   return FoodListElement(
-                    title: title,
-                    imageUrl: item['imageUrl'],
+                    title: item.title,
                     isFavorite: isFav,
                     onFavoriteChanged: (bool newValue) async {
-                      setState(() {
-                        favorites[title] = newValue;
-                      });
-                      await _saveFavorites();
+                      await _toggleFavorite(item.title);
                     },
                     onTap: () {
-                      try {
-                        final matched = widget.allItems.firstWhere(
-                          (f) => f.title.toLowerCase() == title.toLowerCase(),
-                        );
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => RecipePage(foodItem: matched),
-                          ),
-                        );
-                      } catch (e) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Recipe data not found'),
-                          ),
-                        );
-                      }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => RecipePage(foodItem: item),
+                        ),
+                      );
                     },
                   );
                 }
