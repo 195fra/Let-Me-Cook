@@ -19,6 +19,7 @@ class _FavouritePageState extends State<FavouritePage> {
   final Map<String, bool> favorites = {};
   final FavoritesService _favoritesService = FavoritesService();
 
+  // lista visibile dei preferiti (ricomputata ogni volta che cambiano i favoriti)
   late List<FoodItem> favoriteItems = [];
 
   @override
@@ -30,8 +31,10 @@ class _FavouritePageState extends State<FavouritePage> {
   Future<void> _loadFavorites() async {
     final loadedFavorites = await _favoritesService.loadFavorites();
     setState(() {
-      favorites.clear();
-      favorites.addAll(loadedFavorites);
+      favorites
+        ..clear()
+        ..addAll(loadedFavorites);
+      // popola la lista visibile basandosi sulla mappa dei preferiti
       favoriteItems = widget.allItems
           .where((item) => favorites[item.title] == true)
           .toList();
@@ -39,11 +42,14 @@ class _FavouritePageState extends State<FavouritePage> {
   }
 
   Future<void> _toggleFavorite(String title) async {
+    // aggiorna e salva tramite il service
     await _favoritesService.toggleFavorite(favorites, title);
-    setState(() {});
-    favoriteItems = widget.allItems
-        .where((item) => favorites[item.title] == true)
-        .toList();
+    // ricomputa la lista visibile e forza rebuild
+    setState(() {
+      favoriteItems = widget.allItems
+          .where((item) => favorites[item.title] == true)
+          .toList();
+    });
   }
 
   @override
@@ -67,32 +73,55 @@ class _FavouritePageState extends State<FavouritePage> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: favoriteItems.length,
-              itemBuilder: (context, index) {
-                final item = favoriteItems[index];
-                final isFav = favorites[item.title] ?? false;
+            child: Builder(
+              builder: (context) {
+                if (favoriteItems.isEmpty) {
+                  return const Center(child: Text('No favorites yet'));
+                }
 
-                if (selectedCategory == 'All' ||
-                    selectedCategory.toLowerCase() ==
-                        item.category.toLowerCase()) {
-                  return FoodListElement(
-                    title: item.title,
-                    isFavorite: isFav,
-                    onFavoriteChanged: (bool newValue) async {
-                      await _toggleFavorite(item.title);
-                    },
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => RecipePage(foodItem: item),
-                        ),
-                      );
-                    },
+                // applica filtro di categoria alla lista già filtrata per preferiti
+                final visible = selectedCategory == 'All'
+                    ? favoriteItems
+                    : favoriteItems
+                          .where(
+                            (i) =>
+                                i.category.trim().toLowerCase() ==
+                                selectedCategory.trim().toLowerCase(),
+                          )
+                          .toList();
+
+                if (visible.isEmpty) {
+                  return const Center(
+                    child: Text('No favorites in this category'),
                   );
                 }
-                return const SizedBox.shrink();
+
+                return ListView.separated(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  itemCount: visible.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 8),
+                  itemBuilder: (context, index) {
+                    final item = visible[index];
+                    final isFav = favorites[item.title] ?? false;
+
+                    return FoodListElement(
+                      title: item.title,
+                      isFavorite: isFav,
+                      onFavoriteChanged: (newValue) async {
+                        await _toggleFavorite(item.title);
+                      },
+                      onTap: () {
+                        if (!mounted) return;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => RecipePage(foodItem: item),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
               },
             ),
           ),

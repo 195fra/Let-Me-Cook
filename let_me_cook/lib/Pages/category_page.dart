@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:let_me_cook/components/category_header.dart';
+import 'package:let_me_cook/components/FoodListElement.dart';
+import 'package:let_me_cook/components/favourites_service.dart';
 import 'package:let_me_cook/data/food_item.dart';
 import 'package:let_me_cook/data/food_repository.dart';
 import 'package:let_me_cook/data/category_colors.dart';
+import 'package:let_me_cook/Pages/Recipe_page.dart';
 
 class CategoryPage extends StatefulWidget {
   final String category;
@@ -17,10 +20,31 @@ class _CategoryPageState extends State<CategoryPage> {
   String searchQuery = '';
   late final Future<List<FoodItem>> _foodFuture;
 
+  final FavoritesService _favoritesService = FavoritesService();
+  final Map<String, bool> favorites = {};
+
   @override
   void initState() {
     super.initState();
     _foodFuture = loadFoodItemsFromJson();
+    _loadFavorites();
+  }
+
+  Future<void> _loadFavorites() async {
+    final loaded = await _favoritesService.loadFavorites();
+    setState(() {
+      favorites
+        ..clear()
+        ..addAll(loaded);
+    });
+  }
+
+  Future<void> _toggleFavorite(String title) async {
+    await _favoritesService.toggleFavorite(favorites, title);
+    setState(() {
+      // favorites map is already updated by service.toggleFavorite
+      // setState triggers rebuild so UI reflects change
+    });
   }
 
   List<FoodItem> _filterItems(List<FoodItem> items) {
@@ -28,7 +52,9 @@ class _CategoryPageState extends State<CategoryPage> {
     final query = searchQuery.trim().toLowerCase();
 
     if (query.isNotEmpty) {
-      return items.where((item) => item.title.toLowerCase().contains(query)).toList();
+      return items
+          .where((item) => item.title.toLowerCase().contains(query))
+          .toList();
     }
 
     return items.where((item) {
@@ -48,7 +74,9 @@ class _CategoryPageState extends State<CategoryPage> {
           future: _foodFuture,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              debugPrint('Warning: failed to load food items: ${snapshot.error}');
+              debugPrint(
+                'Warning: failed to load food items: ${snapshot.error}',
+              );
             }
 
             final allItems = snapshot.data ?? <FoodItem>[];
@@ -60,7 +88,8 @@ class _CategoryPageState extends State<CategoryPage> {
                   title: widget.category,
                   category: widget.category,
                   searchValue: searchQuery,
-                  onSearchChanged: (value) => setState(() => searchQuery = value),
+                  onSearchChanged: (value) =>
+                      setState(() => searchQuery = value),
                   backgroundColor: headerColor,
                 ),
                 const SizedBox(height: 12),
@@ -68,29 +97,32 @@ class _CategoryPageState extends State<CategoryPage> {
                   child: filteredItems.isEmpty
                       ? const SizedBox.shrink()
                       : ListView.separated(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    itemCount: filteredItems.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 12),
-                    itemBuilder: (context, index) {
-                      final item = filteredItems[index];
-                      return Card(
-                        color: Colors.white,
-                        margin: EdgeInsets.zero,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Text(
-                            item.title,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'Dosis',
-                              color: Colors.black87,
-                            ),
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          itemCount: filteredItems.length,
+                          separatorBuilder: (_, __) =>
+                              const SizedBox(height: 12),
+                          itemBuilder: (context, index) {
+                            final item = filteredItems[index];
+                            final isFav = favorites[item.title] ?? false;
+
+                            return FoodListElement(
+                              title: item.title,
+                              isFavorite: isFav,
+                              onFavoriteChanged: (newValue) async {
+                                await _toggleFavorite(item.title);
+                              },
+                              onTap: () {
+                                if (!mounted) return;
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => RecipePage(foodItem: item),
+                                  ),
+                                );
+                              },
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
                 ),
               ],
             );
