@@ -12,7 +12,7 @@ class FoodListViewModel {
 
   Map<String, List<String>> ingredientCategories = {
     'Vegetables': ['Tomato', 'Onion', 'Potato', 'Zucchini', 'Pepper'],
-    'Meat': ['Chicken', 'Beef', 'Pork', 'Srimp','fish'],
+    'Meat': ['Chicken', 'Beef', 'Pork', 'Srimp', 'fish'],
     'Condiments': ['Vinegar', 'Ketchup', 'Mayonnaise', 'Olive Oil', 'Salt'],
     'Fruits': ['Lemon', 'Lime', 'Apple', 'Pineapple', 'Nuts'],
     'Grains': ['Flour', 'Pasta', 'Tagliatelle', 'Noodles', 'Macaroni'],
@@ -32,16 +32,34 @@ class FoodListViewModel {
   }
 
   void filterRecipes() {
-    List<String> mustInclude = includeText.toLowerCase().split(',').map((s) => s.trim()).where((s) => s.isNotEmpty).toList();
-    List<String> mustExclude = excludeText.toLowerCase().split(',').map((s) => s.trim()).where((s) => s.isNotEmpty).toList();
+    List<String> mustInclude = includeText
+        .toLowerCase()
+        .split(',')
+        .map((s) => s.trim())
+        .where((s) => s.isNotEmpty)
+        .toList();
+    List<String> mustExclude = excludeText
+        .toLowerCase()
+        .split(',')
+        .map((s) => s.trim())
+        .where((s) => s.isNotEmpty)
+        .toList();
 
     mustInclude.addAll(selectedIncludeIngredients.map((s) => s.toLowerCase()));
     mustExclude.addAll(selectedExcludeIngredients.map((s) => s.toLowerCase()));
 
     filteredFoodItems = allFoodItems.where((recipe) {
-      final ingredientsLower = recipe.ingredients.map((i) => i.toLowerCase()).toList();
-      final includesAll = mustInclude.every((item) => ingredientsLower.any((ingredient) => ingredient.contains(item)));
-      final excludesAll = mustExclude.every((item) => !ingredientsLower.any((ingredient) => ingredient.contains(item)));
+      final ingredientsLower = recipe.ingredients
+          .map((i) => i.toLowerCase())
+          .toList();
+      final includesAll = mustInclude.every(
+        (item) =>
+            ingredientsLower.any((ingredient) => ingredient.contains(item)),
+      );
+      final excludesAll = mustExclude.every(
+        (item) =>
+            !ingredientsLower.any((ingredient) => ingredient.contains(item)),
+      );
       return includesAll && excludesAll;
     }).toList();
   }
@@ -71,9 +89,13 @@ class FoodListViewModel {
 
   Color getIngredientButtonColor(String ingredient) {
     if (currentAction == 'Add') {
-      return selectedIncludeIngredients.contains(ingredient) ? Colors.green : Color(0xFFCCCCCC);
+      return selectedIncludeIngredients.contains(ingredient)
+          ? Colors.green
+          : Color(0xFFCCCCCC);
     } else {
-      return selectedExcludeIngredients.contains(ingredient) ? Colors.red : Color(0xFFCCCCCC);
+      return selectedExcludeIngredients.contains(ingredient)
+          ? Colors.red
+          : Color(0xFFCCCCCC);
     }
   }
 }

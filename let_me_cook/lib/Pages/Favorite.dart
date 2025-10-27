@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-
-import '../components/FoodListElement.dart';
-
+import 'package:let_me_cook/components/FoodListElement.dart';
+import 'package:let_me_cook/components/bottom_bar.dart';
+import 'package:let_me_cook/components/favourites_service.dart';
+import 'package:let_me_cook/recepies_filter/food_item.dart';
+import 'package:let_me_cook/Pages/Recipe_page.dart';
 
 class FavouritePage extends StatefulWidget {
-  const FavouritePage({super.key});
+  final List<FoodItem> allItems;
+
+  const FavouritePage({super.key, required this.allItems});
 
   @override
   State<FavouritePage> createState() => _FavouritePageState();
@@ -12,9 +16,27 @@ class FavouritePage extends StatefulWidget {
 
 class _FavouritePageState extends State<FavouritePage> {
   String selectedCategory = 'All';
-  final List<Map<String, dynamic>> favoriteItems = [
-    {'isFavorite': true},
-  ];
+  final Map<String, bool> favorites = {};
+  final FavoritesService _favoritesService = FavoritesService();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFavorites();
+  }
+
+  Future<void> _loadFavorites() async {
+    final loadedFavorites = await _favoritesService.loadFavorites();
+    setState(() {
+      favorites.clear();
+      favorites.addAll(loadedFavorites);
+    });
+  }
+
+  Future<void> _toggleFavorite(String title) async {
+    await _favoritesService.toggleFavorite(favorites, title);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,20 +60,27 @@ class _FavouritePageState extends State<FavouritePage> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: favoriteItems.length,
+              itemCount: widget.allItems.length,
               itemBuilder: (context, index) {
-                final item = favoriteItems[index];
+                final item = widget.allItems[index];
+                final isFav = favorites[item.title] ?? false;
+
                 if (selectedCategory == 'All' ||
-                    selectedCategory == item['category']) {
+                    selectedCategory.toLowerCase() ==
+                        item.category.toLowerCase()) {
                   return FoodListElement(
-                    title: item['title'],
-                    imageUrl: item['imageUrl'],
-                    isFavorite: item['isFavorite'],
-                    onFavoriteChanged: (bool newValue) {
-                      setState(() {
-                        item['isFavorite'] = newValue;
-                        // Here you would typically update your database or state management
-                      });
+                    title: item.title,
+                    isFavorite: isFav,
+                    onFavoriteChanged: (bool newValue) async {
+                      await _toggleFavorite(item.title);
+                    },
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => RecipePage(foodItem: item),
+                        ),
+                      );
                     },
                   );
                 }
@@ -61,6 +90,7 @@ class _FavouritePageState extends State<FavouritePage> {
           ),
         ],
       ),
+      bottomNavigationBar: const BottomBar(),
     );
   }
 

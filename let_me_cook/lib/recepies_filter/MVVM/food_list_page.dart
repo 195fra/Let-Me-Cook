@@ -37,7 +37,11 @@ class _FoodListPageState extends State<FoodListPage> {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: ExpansionTile(
-        title: Text(category, style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+        title: Text(
+          category,
+          style: TextStyle(fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
         showTrailingIcon: false,
         collapsedBackgroundColor: Color(0xFFC8B897),
         children: [
@@ -46,9 +50,7 @@ class _FoodListPageState extends State<FoodListPage> {
             child: Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: ingredients
-                  .map((i) => ingredientButton(i))
-                  .toList(),
+              children: ingredients.map((i) => ingredientButton(i)).toList(),
             ),
           ),
         ],
@@ -78,7 +80,7 @@ class _FoodListPageState extends State<FoodListPage> {
     Set<String> ingredients,
     Color color,
   ) {
-    if (ingredients.isEmpty) return SizedBox.shrink(); 
+    if (ingredients.isEmpty) return SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
