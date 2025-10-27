@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:let_me_cook/Pages/Recipe_page.dart';
 import 'package:let_me_cook/components/bottom_bar.dart';
 import 'package:let_me_cook/home_viewmodel.dart';
-import 'package:let_me_cook/recepies_filter/MVVM/filtered_recipes.dart';
-import 'package:let_me_cook/recepies_filter/MVVM/food_list_page.dart';
+import 'package:let_me_cook/recepies_filter/filtered_recipes.dart';
+import 'package:let_me_cook/recepies_filter/food_list_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> with HomeViewmodel {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const Text(
-                                  "Hello Mario!",
+                                  "Hello Chef!",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 30,

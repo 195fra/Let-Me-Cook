@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:let_me_cook/recepies_filter/MVVM/food_list_viewmodel.dart';
+import 'package:let_me_cook/recepies_filter/food_list_viewmodel.dart';
 import 'package:let_me_cook/recepies_filter/food_item.dart';
 
 mixin HomeViewmodel<T extends StatefulWidget> on State<T> {
