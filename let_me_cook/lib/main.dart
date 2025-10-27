@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:let_me_cook/Pages/on_boarding_1.dart';
 import 'package:let_me_cook/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final seenOnboarding = prefs.getBool('seenOnboarding') ?? false;
+  runApp(MyApp(showOnboarding: !seenOnboarding));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool showOnboarding;
+  const MyApp({super.key, required this.showOnboarding});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const HomePage(),
+      debugShowCheckedModeBanner: false,
+      home: showOnboarding ? const OnBoardingPage() : const HomePage(),
     );
   }
 }
