@@ -1,21 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:let_me_cook/Pages/on_boarding_2.dart';
 import 'package:let_me_cook/home_page.dart';
 
-void main() {
-  runApp(MyApp());
-}
+class OnBoardingPage extends StatelessWidget {
+  const OnBoardingPage({super.key});
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: OnboardingPage(),
-    );
-  }
-}
-
-class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,25 +14,20 @@ class OnboardingPage extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              // Action for Skip button
+              MaterialPageRoute(builder: (context) => const HomePage());
             },
-            child: Text(
-              'Skip',
-              style: TextStyle(color: Colors.black),
-            ),
+            child: Text('Skip', style: TextStyle(color: Colors.black)),
           ),
         ],
       ),
       body: GestureDetector(
         onTap: () {
-            // Naviga verso la pagina FoodListPage quando si fa tap
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomePage(),
-              ),
-            );
-          },
+          // Naviga verso la pagina FoodListPage quando si fa tap
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => OnBoarding2()),
+          );
+        },
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -67,7 +51,7 @@ class OnboardingPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-        
+
               // Description text
               Text(
                 'Your kitchen sidekick even with an almost empty fridge.\n'
@@ -76,20 +60,19 @@ class OnboardingPage extends StatelessWidget {
                 style: TextStyle(fontSize: 16, color: Colors.black),
               ),
               SizedBox(height: 40),
-        
+
               // Image and floating food items - Loading the image from assets
               Expanded(
                 child: Center(
                   child: Stack(
                     children: [
-                      // Chef illustration from assets
                       Positioned(
                         bottom: 20,
                         left: 50,
                         right: 50,
                         child: Image.asset(
-                          'assets/images/onboarding.png', // Path to your asset
-                          width: 200, // Adjust size as needed
+                          'assets/images/onboarding.png',
+                          width: 200,
                         ),
                       ),
                     ],
