@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:let_me_cook/Pages/on_boarding_1.dart';
 import 'package:let_me_cook/home_page.dart';
 import 'package:let_me_cook/recepies_filter/MVVM/food_list_page.dart';
 //import 'package:let_me_cook/recepies_filter/recipie_filter.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const HomePage(/*title: 'Flutter Demo Home Page'*/),
+      home: const WelcomeScreen(/*title: 'Flutter Demo Home Page'*/),
     );
   }
 }
