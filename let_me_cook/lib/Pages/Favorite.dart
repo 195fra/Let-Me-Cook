@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:let_me_cook/components/FoodListElement.dart';
+import 'package:let_me_cook/components/bottom_bar.dart';
 
 class FavouritePage extends StatefulWidget {
   const FavouritePage({super.key});
@@ -11,7 +12,12 @@ class FavouritePage extends StatefulWidget {
 class _FavouritePageState extends State<FavouritePage> {
   String selectedCategory = 'All';
   final List<Map<String, dynamic>> favoriteItems = [
-    {'isFavorite': true},
+    {
+      'title': 'Bruschette',
+      'imageUrl': 'https://example.com/bruschette.jpg',
+      'category': 'Appetizer',
+      'isFavorite': true,
+    },
   ];
 
   @override
@@ -59,6 +65,7 @@ class _FavouritePageState extends State<FavouritePage> {
           ),
         ],
       ),
+      bottomNavigationBar: const BottomBar(),
     );
   }
 
