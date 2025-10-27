@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:let_me_cook/recepies_filter/food_item.dart';
 
@@ -9,45 +10,27 @@ class FoodListViewModel {
   String includeText = '';
   String excludeText = '';
 
-  // Lista di ingredienti predefiniti per i bottoni
-  List<String> availableIngredients = [
-    'Tomato',
-    'Cheese',
-    'Lettuce',
-    'Chicken',
-    'Beef',
-    'Garlic',
-    'Onion',
-    'Olive',
-    'Cucumber',
-    'Pepper',
-    'Mushroom',
-    'Carrot',
-    'Bacon',
-    'Pasta',
-    'Rice',
-    'Spinach',
-  ];
+  Map<String, List<String>> ingredientCategories = {
+    'Vegetables': ['Tomato', 'Onion', 'Potato', 'Zucchini', 'Pepper'],
+    'Meat': ['Chicken', 'Beef', 'Pork', 'Srimp', 'fish'],
+    'Condiments': ['Vinegar', 'Ketchup', 'Mayonnaise', 'Olive Oil', 'Salt'],
+    'Fruits': ['Lemon', 'Lime', 'Apple', 'Pineapple', 'Nuts'],
+    'Grains': ['Flour', 'Pasta', 'Tagliatelle', 'Noodles', 'Macaroni'],
+  };
 
-  // Set degli ingredienti selezionati (inclusi ed esclusi)
-  Set<String> selectedIncludeIngredients = Set<String>();
-  Set<String> selectedExcludeIngredients = Set<String>();
+  Set<String> selectedIncludeIngredients = {};
+  Set<String> selectedExcludeIngredients = {};
 
-  // Carica la lista delle ricette dal JSON
+  String currentAction = 'Add';
+
   Future<void> loadFoodList() async {
-    // Caricamento JSON da assets, se necessario, rimuovi se già presente nella UI
     String jsonString = await rootBundle.loadString("assets/recipes.json");
     Map<String, dynamic> jsonMap = jsonDecode(jsonString);
     List<dynamic> foodListJson = jsonMap['food list'];
-    List<FoodItem> items = foodListJson
-        .map((item) => FoodItem.fromJson(item))
-        .toList();
-
-    allFoodItems = items;
-    filteredFoodItems = items;
+    allFoodItems = foodListJson.map((item) => FoodItem.fromJson(item)).toList();
+    filteredFoodItems = List.from(allFoodItems);
   }
 
-  // Filtra le ricette in base agli ingredienti
   void filterRecipes() {
     List<String> mustInclude = includeText
         .toLowerCase()
@@ -55,7 +38,6 @@ class FoodListViewModel {
         .map((s) => s.trim())
         .where((s) => s.isNotEmpty)
         .toList();
-
     List<String> mustExclude = excludeText
         .toLowerCase()
         .split(',')
@@ -63,8 +45,6 @@ class FoodListViewModel {
         .where((s) => s.isNotEmpty)
         .toList();
 
-    // Aggiungiamo gli ingredienti selezionati dai bottoni ai filtri
-    // Normalizziamo i valori dei bottoni a lowercase per confronti coerenti
     mustInclude.addAll(selectedIncludeIngredients.map((s) => s.toLowerCase()));
     mustExclude.addAll(selectedExcludeIngredients.map((s) => s.toLowerCase()));
 
@@ -72,42 +52,50 @@ class FoodListViewModel {
       final ingredientsLower = recipe.ingredients
           .map((i) => i.toLowerCase())
           .toList();
-
       final includesAll = mustInclude.every(
         (item) =>
             ingredientsLower.any((ingredient) => ingredient.contains(item)),
       );
-
       final excludesAll = mustExclude.every(
         (item) =>
             !ingredientsLower.any((ingredient) => ingredient.contains(item)),
       );
-
       return includesAll && excludesAll;
     }).toList();
   }
 
-  // Aggiungi o rimuovi ingredienti dal filtro "include"
-  void toggleIncludeIngredient(String ingredient) {
-    if (selectedIncludeIngredients.contains(ingredient)) {
-      selectedIncludeIngredients.remove(ingredient);
-    } else {
-      // Se sto aggiungendo a include, rimuovo dallo set exclude per evitare conflitti
-      selectedExcludeIngredients.remove(ingredient);
-      selectedIncludeIngredients.add(ingredient);
-    }
-    filterRecipes(); // Applica il filtro dopo la selezione
+  void setAction(String action) {
+    currentAction = action;
   }
 
-  // Aggiungi o rimuovi ingredienti dal filtro "exclude"
-  void toggleExcludeIngredient(String ingredient) {
-    if (selectedExcludeIngredients.contains(ingredient)) {
-      selectedExcludeIngredients.remove(ingredient);
+  void toggleIngredient(String ingredient) {
+    if (currentAction == 'Add') {
+      if (selectedIncludeIngredients.contains(ingredient)) {
+        selectedIncludeIngredients.remove(ingredient);
+      } else {
+        selectedExcludeIngredients.remove(ingredient);
+        selectedIncludeIngredients.add(ingredient);
+      }
     } else {
-      // Se sto aggiungendo a exclude, rimuovo dallo set include per evitare conflitti
-      selectedIncludeIngredients.remove(ingredient);
-      selectedExcludeIngredients.add(ingredient);
+      if (selectedExcludeIngredients.contains(ingredient)) {
+        selectedExcludeIngredients.remove(ingredient);
+      } else {
+        selectedIncludeIngredients.remove(ingredient);
+        selectedExcludeIngredients.add(ingredient);
+      }
     }
-    filterRecipes(); // Applica il filtro dopo la selezione
+    filterRecipes();
+  }
+
+  Color getIngredientButtonColor(String ingredient) {
+    if (currentAction == 'Add') {
+      return selectedIncludeIngredients.contains(ingredient)
+          ? Colors.green
+          : Color(0xFFCCCCCC);
+    } else {
+      return selectedExcludeIngredients.contains(ingredient)
+          ? Colors.red
+          : Color(0xFFCCCCCC);
+    }
   }
 }
