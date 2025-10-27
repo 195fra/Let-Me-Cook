@@ -121,6 +121,7 @@ class _RecipeJournalState extends State<RecipeJournal> {
           ],
         ),
       ),
+      bottomNavigationBar: const BottomBar(),
     );
   }
 }
