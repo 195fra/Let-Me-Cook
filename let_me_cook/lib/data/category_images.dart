@@ -5,3 +5,14 @@ const Map<String, String> categoryImages = {
   'Side Dish': 'assets/images/side_dish.png',
   'Dessert': 'assets/images/dessert.png',
 };
+
+// Restituisce il path dell'immagine per una categoria facendo un match case-insensitive
+String getCategoryImage(String? category) {
+  if (category == null) return 'assets/images/appetizer.png';
+  final key = category.trim().toLowerCase();
+  for (final entry in categoryImages.entries) {
+    if (entry.key.toLowerCase() == key) return entry.value;
+  }
+  // fallback su un'immagine esistente per evitare asset missing
+  return 'assets/images/appetizer.png';
+}
