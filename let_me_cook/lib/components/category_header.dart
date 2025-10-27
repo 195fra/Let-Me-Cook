@@ -64,14 +64,28 @@ class CategoryHeader extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            right: 0,
-            top: 0,
-            bottom: 0,
-            child: Image.asset(
-              imagePath,
-              height: 218,
-              fit: BoxFit.cover,
+          // 🔶 Immagine con padding solo per "journal"
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: category == 'journal'
+                  ? Padding(
+                padding: const EdgeInsets.only(right: 32),
+                child: SizedBox(
+                  width: 120,
+                  child: Image.asset(
+                    imagePath,
+                    fit: BoxFit.contain,
+                    alignment: Alignment.bottomRight,
+                  ),
+                ),
+              )
+                  : Image.asset(
+                imagePath,
+                height: 218,
+                fit: BoxFit.cover,
+                alignment: Alignment.bottomRight,
+              ),
             ),
           ),
         ],
