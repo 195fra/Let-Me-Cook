@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:let_me_cook/Pages/category_page.dart';
 import 'package:let_me_cook/components/category_header.dart';
-import 'package:let_me_cook/data/category_colors.dart';
 import 'package:let_me_cook/components/bottom_bar.dart';
+import 'package:let_me_cook/data/category_backgrounds.dart';
 
 class RecipeJournal extends StatefulWidget {
   const RecipeJournal({super.key});
@@ -23,13 +23,10 @@ class _RecipeJournalState extends State<RecipeJournal> {
   int _currentIndex = 0;
 
   void _onTabSelected(int index) {
-    // Per ora cambiamo solo l'indice selezionato; eventuale navigazione può essere
-    // aggiunta qui (es. aprire Favorites o Profile)
     setState(() {
       _currentIndex = index;
     });
 
-    // Esempio minimo: mostrare uno snack per le tab non implementate
     if (index != 0) {
       final labels = ['Home', 'Favorites', 'Profile'];
       ScaffoldMessenger.of(context).showSnackBar(
@@ -88,26 +85,34 @@ class _RecipeJournalState extends State<RecipeJournal> {
                             ),
                           );
                         },
-                        child: Card(
-                          color: getCategoryColor(category),
-                          shape: RoundedRectangleBorder(
+                        child: Container(
+                          width: 145,
+                          height: 200,
+                          decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
+                            image: DecorationImage(
+                              image: AssetImage(getCategoryBackground(category)),
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                          child: SizedBox(
-                            width: 145,
-                            height: 200,
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Text(
-                                  category.toUpperCase(),
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Dosis',
-                                    color: Colors.white,
-                                  ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Align(
+                              alignment: Alignment.bottomLeft,
+                              child: Text(
+                                category.toUpperCase(),
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Dosis',
+                                  color: Colors.white,
+                                  shadows: [
+                                    Shadow(
+                                      offset: Offset(0, 1),
+                                      blurRadius: 2,
+                                      color: Colors.black54,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

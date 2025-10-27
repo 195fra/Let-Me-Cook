@@ -68,7 +68,7 @@ class _CategoryPageState extends State<CategoryPage> {
     final headerColor = getCategoryColor(widget.category);
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: FutureBuilder<List<FoodItem>>(
           future: _foodFuture,
