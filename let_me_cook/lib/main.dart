@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:let_me_cook/Pages/on_boarding_1.dart';
 import 'package:let_me_cook/home_page.dart';
 
 void main() {
@@ -13,7 +14,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: const HomePage(),
