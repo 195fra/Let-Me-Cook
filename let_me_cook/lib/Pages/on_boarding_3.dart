@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:let_me_cook/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoarding3 extends StatelessWidget {
   const OnBoarding3({super.key});
+
+  Future<void> _finishAndGoHome(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('seenOnboarding', true);
+    if (!context.mounted) return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const HomePage()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +52,7 @@ class OnBoarding3 extends StatelessWidget {
               right: 12,
               top: 12,
               child: TextButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (_) => const HomePage()),
-                  );
-                },
+                onPressed: () => _finishAndGoHome(context),
                 child: const Text(
                   'Continue',
                   style: TextStyle(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:let_me_cook/Pages/on_boarding_3.dart';
 import 'package:let_me_cook/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoarding2 extends StatefulWidget {
   const OnBoarding2({super.key});
@@ -11,6 +12,16 @@ class OnBoarding2 extends StatefulWidget {
 
 class _OnBoarding2State extends State<OnBoarding2> {
   bool _navigated = false;
+
+  Future<void> _finishAndGoHome(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('seenOnboarding', true);
+    if (!context.mounted) return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const HomePage()),
+    );
+  }
 
   void _goNext() {
     if (_navigated) return;
@@ -40,7 +51,6 @@ class _OnBoarding2State extends State<OnBoarding2> {
         child: SafeArea(
           child: Stack(
             children: [
-              // Top controls: back and skip (not tappable to advance)
               Positioned(
                 left: 0,
                 right: 0,
@@ -56,18 +66,11 @@ class _OnBoarding2State extends State<OnBoarding2> {
                           color: Colors.white,
                         ),
                         onPressed: () {
-                          Navigator.pop(
-                            context,
-                          ); // torna alla pagina precedente
+                          Navigator.pop(context);
                         },
                       ),
                       TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (_) => const HomePage()),
-                          );
-                        },
+                        onPressed: () => _finishAndGoHome(context),
                         child: const Text(
                           'Skip',
                           style: TextStyle(color: Colors.white, fontSize: 16),
